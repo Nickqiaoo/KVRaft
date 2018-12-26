@@ -1,0 +1,4 @@
+*.o
+*.a
+kvraft_main
+kvraft_tool_main
