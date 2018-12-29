@@ -19,5 +19,6 @@ class KVRaftService {
     virtual int PHXEcho(const google::protobuf::StringValue &req, google::protobuf::StringValue *resp);
     virtual int RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp);
     virtual int AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp);
+    virtual int Command(const kvraft::KVArgs &req, kvraft::KVReply *resp);
 };
 

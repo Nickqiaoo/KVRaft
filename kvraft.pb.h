@@ -40,61 +40,86 @@ void protobuf_ShutdownFile_kvraft_2eproto();
 
 class AppendEntriesArgs;
 class AppendEntriesReply;
+class KVArgs;
+class KVReply;
 class LogEntry;
-class Op;
+class Operation;
 class RequestVoteArgs;
 class RequestVoteReply;
 
-enum Op_OpName {
-  Op_OpName_GET = 0,
-  Op_OpName_PUT = 1,
-  Op_OpName_DEL = 2,
-  Op_OpName_Op_OpName_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  Op_OpName_Op_OpName_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+enum Operation_OpName {
+  Operation_OpName_GET = 0,
+  Operation_OpName_PUT = 1,
+  Operation_OpName_DEL = 2,
+  Operation_OpName_Operation_OpName_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  Operation_OpName_Operation_OpName_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool Op_OpName_IsValid(int value);
-const Op_OpName Op_OpName_OpName_MIN = Op_OpName_GET;
-const Op_OpName Op_OpName_OpName_MAX = Op_OpName_DEL;
-const int Op_OpName_OpName_ARRAYSIZE = Op_OpName_OpName_MAX + 1;
+bool Operation_OpName_IsValid(int value);
+const Operation_OpName Operation_OpName_OpName_MIN = Operation_OpName_GET;
+const Operation_OpName Operation_OpName_OpName_MAX = Operation_OpName_DEL;
+const int Operation_OpName_OpName_ARRAYSIZE = Operation_OpName_OpName_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* Op_OpName_descriptor();
-inline const ::std::string& Op_OpName_Name(Op_OpName value) {
+const ::google::protobuf::EnumDescriptor* Operation_OpName_descriptor();
+inline const ::std::string& Operation_OpName_Name(Operation_OpName value) {
   return ::google::protobuf::internal::NameOfEnum(
-    Op_OpName_descriptor(), value);
+    Operation_OpName_descriptor(), value);
 }
-inline bool Op_OpName_Parse(
-    const ::std::string& name, Op_OpName* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Op_OpName>(
-    Op_OpName_descriptor(), name, value);
+inline bool Operation_OpName_Parse(
+    const ::std::string& name, Operation_OpName* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Operation_OpName>(
+    Operation_OpName_descriptor(), name, value);
+}
+enum KVResult {
+  OK = 0,
+  ErrNoKey = 1,
+  ErrTimeout = 2,
+  ErrWrongLeader = 3,
+  KVResult_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  KVResult_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool KVResult_IsValid(int value);
+const KVResult KVResult_MIN = OK;
+const KVResult KVResult_MAX = ErrWrongLeader;
+const int KVResult_ARRAYSIZE = KVResult_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* KVResult_descriptor();
+inline const ::std::string& KVResult_Name(KVResult value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    KVResult_descriptor(), value);
+}
+inline bool KVResult_Parse(
+    const ::std::string& name, KVResult* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<KVResult>(
+    KVResult_descriptor(), name, value);
 }
 // ===================================================================
 
-class Op : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:kvraft.Op) */ {
+class Operation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:kvraft.Operation) */ {
  public:
-  Op();
-  virtual ~Op();
+  Operation();
+  virtual ~Operation();
 
-  Op(const Op& from);
+  Operation(const Operation& from);
 
-  inline Op& operator=(const Op& from) {
+  inline Operation& operator=(const Operation& from) {
     CopyFrom(from);
     return *this;
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Op& default_instance();
+  static const Operation& default_instance();
 
-  void Swap(Op* other);
+  void Swap(Operation* other);
 
   // implements Message ----------------------------------------------
 
-  inline Op* New() const { return New(NULL); }
+  inline Operation* New() const { return New(NULL); }
 
-  Op* New(::google::protobuf::Arena* arena) const;
+  Operation* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Op& from);
-  void MergeFrom(const Op& from);
+  void CopyFrom(const Operation& from);
+  void MergeFrom(const Operation& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -113,7 +138,7 @@ class Op : public ::google::protobuf::Message /* @@protoc_insertion_point(class_
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(Op* other);
+  void InternalSwap(Operation* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return _internal_metadata_.arena();
@@ -127,39 +152,45 @@ class Op : public ::google::protobuf::Message /* @@protoc_insertion_point(class_
 
   // nested types ----------------------------------------------------
 
-  typedef Op_OpName OpName;
+  typedef Operation_OpName OpName;
   static const OpName GET =
-    Op_OpName_GET;
+    Operation_OpName_GET;
   static const OpName PUT =
-    Op_OpName_PUT;
+    Operation_OpName_PUT;
   static const OpName DEL =
-    Op_OpName_DEL;
+    Operation_OpName_DEL;
   static inline bool OpName_IsValid(int value) {
-    return Op_OpName_IsValid(value);
+    return Operation_OpName_IsValid(value);
   }
   static const OpName OpName_MIN =
-    Op_OpName_OpName_MIN;
+    Operation_OpName_OpName_MIN;
   static const OpName OpName_MAX =
-    Op_OpName_OpName_MAX;
+    Operation_OpName_OpName_MAX;
   static const int OpName_ARRAYSIZE =
-    Op_OpName_OpName_ARRAYSIZE;
+    Operation_OpName_OpName_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
   OpName_descriptor() {
-    return Op_OpName_descriptor();
+    return Operation_OpName_descriptor();
   }
   static inline const ::std::string& OpName_Name(OpName value) {
-    return Op_OpName_Name(value);
+    return Operation_OpName_Name(value);
   }
   static inline bool OpName_Parse(const ::std::string& name,
       OpName* value) {
-    return Op_OpName_Parse(name, value);
+    return Operation_OpName_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
-  // optional string Key = 1;
+  // optional .kvraft.Operation.OpName op = 1;
+  void clear_op();
+  static const int kOpFieldNumber = 1;
+  ::kvraft::Operation_OpName op() const;
+  void set_op(::kvraft::Operation_OpName value);
+
+  // optional string key = 2;
   void clear_key();
-  static const int kKeyFieldNumber = 1;
+  static const int kKeyFieldNumber = 2;
   const ::std::string& key() const;
   void set_key(const ::std::string& value);
   void set_key(const char* value);
@@ -168,7 +199,201 @@ class Op : public ::google::protobuf::Message /* @@protoc_insertion_point(class_
   ::std::string* release_key();
   void set_allocated_key(::std::string* key);
 
-  // optional string Value = 2;
+  // optional string value = 3;
+  void clear_value();
+  static const int kValueFieldNumber = 3;
+  const ::std::string& value() const;
+  void set_value(const ::std::string& value);
+  void set_value(const char* value);
+  void set_value(const char* value, size_t size);
+  ::std::string* mutable_value();
+  ::std::string* release_value();
+  void set_allocated_value(::std::string* value);
+
+  // @@protoc_insertion_point(class_scope:kvraft.Operation)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::internal::ArenaStringPtr key_;
+  ::google::protobuf::internal::ArenaStringPtr value_;
+  int op_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_kvraft_2eproto();
+  friend void protobuf_AssignDesc_kvraft_2eproto();
+  friend void protobuf_ShutdownFile_kvraft_2eproto();
+
+  void InitAsDefaultInstance();
+  static Operation* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class KVArgs : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:kvraft.KVArgs) */ {
+ public:
+  KVArgs();
+  virtual ~KVArgs();
+
+  KVArgs(const KVArgs& from);
+
+  inline KVArgs& operator=(const KVArgs& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const KVArgs& default_instance();
+
+  void Swap(KVArgs* other);
+
+  // implements Message ----------------------------------------------
+
+  inline KVArgs* New() const { return New(NULL); }
+
+  KVArgs* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const KVArgs& from);
+  void MergeFrom(const KVArgs& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(KVArgs* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .kvraft.Operation command = 1;
+  bool has_command() const;
+  void clear_command();
+  static const int kCommandFieldNumber = 1;
+  const ::kvraft::Operation& command() const;
+  ::kvraft::Operation* mutable_command();
+  ::kvraft::Operation* release_command();
+  void set_allocated_command(::kvraft::Operation* command);
+
+  // optional int32 cliendid = 2;
+  void clear_cliendid();
+  static const int kCliendidFieldNumber = 2;
+  ::google::protobuf::int32 cliendid() const;
+  void set_cliendid(::google::protobuf::int32 value);
+
+  // optional int32 seq = 3;
+  void clear_seq();
+  static const int kSeqFieldNumber = 3;
+  ::google::protobuf::int32 seq() const;
+  void set_seq(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:kvraft.KVArgs)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::kvraft::Operation* command_;
+  ::google::protobuf::int32 cliendid_;
+  ::google::protobuf::int32 seq_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_kvraft_2eproto();
+  friend void protobuf_AssignDesc_kvraft_2eproto();
+  friend void protobuf_ShutdownFile_kvraft_2eproto();
+
+  void InitAsDefaultInstance();
+  static KVArgs* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class KVReply : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:kvraft.KVReply) */ {
+ public:
+  KVReply();
+  virtual ~KVReply();
+
+  KVReply(const KVReply& from);
+
+  inline KVReply& operator=(const KVReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const KVReply& default_instance();
+
+  void Swap(KVReply* other);
+
+  // implements Message ----------------------------------------------
+
+  inline KVReply* New() const { return New(NULL); }
+
+  KVReply* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const KVReply& from);
+  void MergeFrom(const KVReply& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(KVReply* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .kvraft.KVResult res = 1;
+  void clear_res();
+  static const int kResFieldNumber = 1;
+  ::kvraft::KVResult res() const;
+  void set_res(::kvraft::KVResult value);
+
+  // optional string value = 2;
   void clear_value();
   static const int kValueFieldNumber = 2;
   const ::std::string& value() const;
@@ -179,20 +404,20 @@ class Op : public ::google::protobuf::Message /* @@protoc_insertion_point(class_
   ::std::string* release_value();
   void set_allocated_value(::std::string* value);
 
-  // @@protoc_insertion_point(class_scope:kvraft.Op)
+  // @@protoc_insertion_point(class_scope:kvraft.KVReply)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
-  ::google::protobuf::internal::ArenaStringPtr key_;
   ::google::protobuf::internal::ArenaStringPtr value_;
+  int res_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_kvraft_2eproto();
   friend void protobuf_AssignDesc_kvraft_2eproto();
   friend void protobuf_ShutdownFile_kvraft_2eproto();
 
   void InitAsDefaultInstance();
-  static Op* default_instance_;
+  static KVReply* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -256,16 +481,16 @@ class LogEntry : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // optional .kvraft.Op Command = 1;
+  // optional .kvraft.Operation command = 1;
   bool has_command() const;
   void clear_command();
   static const int kCommandFieldNumber = 1;
-  const ::kvraft::Op& command() const;
-  ::kvraft::Op* mutable_command();
-  ::kvraft::Op* release_command();
-  void set_allocated_command(::kvraft::Op* command);
+  const ::kvraft::Operation& command() const;
+  ::kvraft::Operation* mutable_command();
+  ::kvraft::Operation* release_command();
+  void set_allocated_command(::kvraft::Operation* command);
 
-  // optional int32 Term = 2;
+  // optional int32 term = 2;
   void clear_term();
   static const int kTermFieldNumber = 2;
   ::google::protobuf::int32 term() const;
@@ -276,7 +501,7 @@ class LogEntry : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
-  ::kvraft::Op* command_;
+  ::kvraft::Operation* command_;
   ::google::protobuf::int32 term_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_kvraft_2eproto();
@@ -348,27 +573,27 @@ class RequestVoteArgs : public ::google::protobuf::Message /* @@protoc_insertion
 
   // accessors -------------------------------------------------------
 
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   void clear_term();
   static const int kTermFieldNumber = 1;
   ::google::protobuf::int32 term() const;
   void set_term(::google::protobuf::int32 value);
 
-  // optional int32 CandidateId = 2;
+  // optional int32 candidateid = 2;
   void clear_candidateid();
-  static const int kCandidateIdFieldNumber = 2;
+  static const int kCandidateidFieldNumber = 2;
   ::google::protobuf::int32 candidateid() const;
   void set_candidateid(::google::protobuf::int32 value);
 
-  // optional int32 LastLogIndex = 3;
+  // optional int32 lastLogindex = 3;
   void clear_lastlogindex();
-  static const int kLastLogIndexFieldNumber = 3;
+  static const int kLastLogindexFieldNumber = 3;
   ::google::protobuf::int32 lastlogindex() const;
   void set_lastlogindex(::google::protobuf::int32 value);
 
-  // optional int32 LastLogTerm = 4;
+  // optional int32 lastLogterm = 4;
   void clear_lastlogterm();
-  static const int kLastLogTermFieldNumber = 4;
+  static const int kLastLogtermFieldNumber = 4;
   ::google::protobuf::int32 lastlogterm() const;
   void set_lastlogterm(::google::protobuf::int32 value);
 
@@ -451,15 +676,15 @@ class RequestVoteReply : public ::google::protobuf::Message /* @@protoc_insertio
 
   // accessors -------------------------------------------------------
 
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   void clear_term();
   static const int kTermFieldNumber = 1;
   ::google::protobuf::int32 term() const;
   void set_term(::google::protobuf::int32 value);
 
-  // optional bool VoteGranted = 2;
+  // optional bool votegranted = 2;
   void clear_votegranted();
-  static const int kVoteGrantedFieldNumber = 2;
+  static const int kVotegrantedFieldNumber = 2;
   bool votegranted() const;
   void set_votegranted(bool value);
 
@@ -540,37 +765,37 @@ class AppendEntriesArgs : public ::google::protobuf::Message /* @@protoc_inserti
 
   // accessors -------------------------------------------------------
 
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   void clear_term();
   static const int kTermFieldNumber = 1;
   ::google::protobuf::int32 term() const;
   void set_term(::google::protobuf::int32 value);
 
-  // optional int32 LeaderId = 2;
+  // optional int32 leaderId = 2;
   void clear_leaderid();
   static const int kLeaderIdFieldNumber = 2;
   ::google::protobuf::int32 leaderid() const;
   void set_leaderid(::google::protobuf::int32 value);
 
-  // optional int32 PrevLogIndex = 3;
+  // optional int32 prevlogindex = 3;
   void clear_prevlogindex();
-  static const int kPrevLogIndexFieldNumber = 3;
+  static const int kPrevlogindexFieldNumber = 3;
   ::google::protobuf::int32 prevlogindex() const;
   void set_prevlogindex(::google::protobuf::int32 value);
 
-  // optional int32 PrevLogTerm = 4;
+  // optional int32 prevlogterm = 4;
   void clear_prevlogterm();
-  static const int kPrevLogTermFieldNumber = 4;
+  static const int kPrevlogtermFieldNumber = 4;
   ::google::protobuf::int32 prevlogterm() const;
   void set_prevlogterm(::google::protobuf::int32 value);
 
-  // optional int32 LeaderCommit = 5;
+  // optional int32 leadercommit = 5;
   void clear_leadercommit();
-  static const int kLeaderCommitFieldNumber = 5;
+  static const int kLeadercommitFieldNumber = 5;
   ::google::protobuf::int32 leadercommit() const;
   void set_leadercommit(::google::protobuf::int32 value);
 
-  // repeated .kvraft.LogEntry Entries = 6;
+  // repeated .kvraft.LogEntry entries = 6;
   int entries_size() const;
   void clear_entries();
   static const int kEntriesFieldNumber = 6;
@@ -663,21 +888,21 @@ class AppendEntriesReply : public ::google::protobuf::Message /* @@protoc_insert
 
   // accessors -------------------------------------------------------
 
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   void clear_term();
   static const int kTermFieldNumber = 1;
   ::google::protobuf::int32 term() const;
   void set_term(::google::protobuf::int32 value);
 
-  // optional bool Success = 2;
+  // optional bool success = 2;
   void clear_success();
   static const int kSuccessFieldNumber = 2;
   bool success() const;
   void set_success(bool value);
 
-  // optional int32 ReplicatedIndex = 3;
+  // optional int32 replicatedindex = 3;
   void clear_replicatedindex();
-  static const int kReplicatedIndexFieldNumber = 3;
+  static const int kReplicatedindexFieldNumber = 3;
   ::google::protobuf::int32 replicatedindex() const;
   void set_replicatedindex(::google::protobuf::int32 value);
 
@@ -703,128 +928,142 @@ class AppendEntriesReply : public ::google::protobuf::Message /* @@protoc_insert
 // ===================================================================
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
-// Op
+// Operation
 
-// optional string Key = 1;
-inline void Op::clear_key() {
+// optional .kvraft.Operation.OpName op = 1;
+inline void Operation::clear_op() {
+  op_ = 0;
+}
+inline ::kvraft::Operation_OpName Operation::op() const {
+  // @@protoc_insertion_point(field_get:kvraft.Operation.op)
+  return static_cast< ::kvraft::Operation_OpName >(op_);
+}
+inline void Operation::set_op(::kvraft::Operation_OpName value) {
+  
+  op_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.Operation.op)
+}
+
+// optional string key = 2;
+inline void Operation::clear_key() {
   key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Op::key() const {
-  // @@protoc_insertion_point(field_get:kvraft.Op.Key)
+inline const ::std::string& Operation::key() const {
+  // @@protoc_insertion_point(field_get:kvraft.Operation.key)
   return key_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Op::set_key(const ::std::string& value) {
+inline void Operation::set_key(const ::std::string& value) {
   
   key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_set:kvraft.Operation.key)
 }
-inline void Op::set_key(const char* value) {
+inline void Operation::set_key(const char* value) {
   
   key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_set_char:kvraft.Operation.key)
 }
-inline void Op::set_key(const char* value, size_t size) {
+inline void Operation::set_key(const char* value, size_t size) {
   
   key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_set_pointer:kvraft.Operation.key)
 }
-inline ::std::string* Op::mutable_key() {
+inline ::std::string* Operation::mutable_key() {
   
-  // @@protoc_insertion_point(field_mutable:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_mutable:kvraft.Operation.key)
   return key_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Op::release_key() {
-  // @@protoc_insertion_point(field_release:kvraft.Op.Key)
+inline ::std::string* Operation::release_key() {
+  // @@protoc_insertion_point(field_release:kvraft.Operation.key)
   
   return key_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Op::set_allocated_key(::std::string* key) {
+inline void Operation::set_allocated_key(::std::string* key) {
   if (key != NULL) {
     
   } else {
     
   }
   key_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), key);
-  // @@protoc_insertion_point(field_set_allocated:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_set_allocated:kvraft.Operation.key)
 }
 
-// optional string Value = 2;
-inline void Op::clear_value() {
+// optional string value = 3;
+inline void Operation::clear_value() {
   value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Op::value() const {
-  // @@protoc_insertion_point(field_get:kvraft.Op.Value)
+inline const ::std::string& Operation::value() const {
+  // @@protoc_insertion_point(field_get:kvraft.Operation.value)
   return value_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Op::set_value(const ::std::string& value) {
+inline void Operation::set_value(const ::std::string& value) {
   
   value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_set:kvraft.Operation.value)
 }
-inline void Op::set_value(const char* value) {
+inline void Operation::set_value(const char* value) {
   
   value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_set_char:kvraft.Operation.value)
 }
-inline void Op::set_value(const char* value, size_t size) {
+inline void Operation::set_value(const char* value, size_t size) {
   
   value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_set_pointer:kvraft.Operation.value)
 }
-inline ::std::string* Op::mutable_value() {
+inline ::std::string* Operation::mutable_value() {
   
-  // @@protoc_insertion_point(field_mutable:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_mutable:kvraft.Operation.value)
   return value_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Op::release_value() {
-  // @@protoc_insertion_point(field_release:kvraft.Op.Value)
+inline ::std::string* Operation::release_value() {
+  // @@protoc_insertion_point(field_release:kvraft.Operation.value)
   
   return value_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Op::set_allocated_value(::std::string* value) {
+inline void Operation::set_allocated_value(::std::string* value) {
   if (value != NULL) {
     
   } else {
     
   }
   value_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set_allocated:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_set_allocated:kvraft.Operation.value)
 }
 
 // -------------------------------------------------------------------
 
-// LogEntry
+// KVArgs
 
-// optional .kvraft.Op Command = 1;
-inline bool LogEntry::has_command() const {
+// optional .kvraft.Operation command = 1;
+inline bool KVArgs::has_command() const {
   return !_is_default_instance_ && command_ != NULL;
 }
-inline void LogEntry::clear_command() {
+inline void KVArgs::clear_command() {
   if (GetArenaNoVirtual() == NULL && command_ != NULL) delete command_;
   command_ = NULL;
 }
-inline const ::kvraft::Op& LogEntry::command() const {
-  // @@protoc_insertion_point(field_get:kvraft.LogEntry.Command)
+inline const ::kvraft::Operation& KVArgs::command() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVArgs.command)
   return command_ != NULL ? *command_ : *default_instance_->command_;
 }
-inline ::kvraft::Op* LogEntry::mutable_command() {
+inline ::kvraft::Operation* KVArgs::mutable_command() {
   
   if (command_ == NULL) {
-    command_ = new ::kvraft::Op;
+    command_ = new ::kvraft::Operation;
   }
-  // @@protoc_insertion_point(field_mutable:kvraft.LogEntry.Command)
+  // @@protoc_insertion_point(field_mutable:kvraft.KVArgs.command)
   return command_;
 }
-inline ::kvraft::Op* LogEntry::release_command() {
-  // @@protoc_insertion_point(field_release:kvraft.LogEntry.Command)
+inline ::kvraft::Operation* KVArgs::release_command() {
+  // @@protoc_insertion_point(field_release:kvraft.KVArgs.command)
   
-  ::kvraft::Op* temp = command_;
+  ::kvraft::Operation* temp = command_;
   command_ = NULL;
   return temp;
 }
-inline void LogEntry::set_allocated_command(::kvraft::Op* command) {
+inline void KVArgs::set_allocated_command(::kvraft::Operation* command) {
   delete command_;
   command_ = command;
   if (command) {
@@ -832,190 +1071,322 @@ inline void LogEntry::set_allocated_command(::kvraft::Op* command) {
   } else {
     
   }
-  // @@protoc_insertion_point(field_set_allocated:kvraft.LogEntry.Command)
+  // @@protoc_insertion_point(field_set_allocated:kvraft.KVArgs.command)
 }
 
-// optional int32 Term = 2;
+// optional int32 cliendid = 2;
+inline void KVArgs::clear_cliendid() {
+  cliendid_ = 0;
+}
+inline ::google::protobuf::int32 KVArgs::cliendid() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVArgs.cliendid)
+  return cliendid_;
+}
+inline void KVArgs::set_cliendid(::google::protobuf::int32 value) {
+  
+  cliendid_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.KVArgs.cliendid)
+}
+
+// optional int32 seq = 3;
+inline void KVArgs::clear_seq() {
+  seq_ = 0;
+}
+inline ::google::protobuf::int32 KVArgs::seq() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVArgs.seq)
+  return seq_;
+}
+inline void KVArgs::set_seq(::google::protobuf::int32 value) {
+  
+  seq_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.KVArgs.seq)
+}
+
+// -------------------------------------------------------------------
+
+// KVReply
+
+// optional .kvraft.KVResult res = 1;
+inline void KVReply::clear_res() {
+  res_ = 0;
+}
+inline ::kvraft::KVResult KVReply::res() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVReply.res)
+  return static_cast< ::kvraft::KVResult >(res_);
+}
+inline void KVReply::set_res(::kvraft::KVResult value) {
+  
+  res_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.KVReply.res)
+}
+
+// optional string value = 2;
+inline void KVReply::clear_value() {
+  value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& KVReply::value() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVReply.value)
+  return value_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void KVReply::set_value(const ::std::string& value) {
+  
+  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:kvraft.KVReply.value)
+}
+inline void KVReply::set_value(const char* value) {
+  
+  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:kvraft.KVReply.value)
+}
+inline void KVReply::set_value(const char* value, size_t size) {
+  
+  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:kvraft.KVReply.value)
+}
+inline ::std::string* KVReply::mutable_value() {
+  
+  // @@protoc_insertion_point(field_mutable:kvraft.KVReply.value)
+  return value_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* KVReply::release_value() {
+  // @@protoc_insertion_point(field_release:kvraft.KVReply.value)
+  
+  return value_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void KVReply::set_allocated_value(::std::string* value) {
+  if (value != NULL) {
+    
+  } else {
+    
+  }
+  value_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set_allocated:kvraft.KVReply.value)
+}
+
+// -------------------------------------------------------------------
+
+// LogEntry
+
+// optional .kvraft.Operation command = 1;
+inline bool LogEntry::has_command() const {
+  return !_is_default_instance_ && command_ != NULL;
+}
+inline void LogEntry::clear_command() {
+  if (GetArenaNoVirtual() == NULL && command_ != NULL) delete command_;
+  command_ = NULL;
+}
+inline const ::kvraft::Operation& LogEntry::command() const {
+  // @@protoc_insertion_point(field_get:kvraft.LogEntry.command)
+  return command_ != NULL ? *command_ : *default_instance_->command_;
+}
+inline ::kvraft::Operation* LogEntry::mutable_command() {
+  
+  if (command_ == NULL) {
+    command_ = new ::kvraft::Operation;
+  }
+  // @@protoc_insertion_point(field_mutable:kvraft.LogEntry.command)
+  return command_;
+}
+inline ::kvraft::Operation* LogEntry::release_command() {
+  // @@protoc_insertion_point(field_release:kvraft.LogEntry.command)
+  
+  ::kvraft::Operation* temp = command_;
+  command_ = NULL;
+  return temp;
+}
+inline void LogEntry::set_allocated_command(::kvraft::Operation* command) {
+  delete command_;
+  command_ = command;
+  if (command) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:kvraft.LogEntry.command)
+}
+
+// optional int32 term = 2;
 inline void LogEntry::clear_term() {
   term_ = 0;
 }
 inline ::google::protobuf::int32 LogEntry::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.LogEntry.Term)
+  // @@protoc_insertion_point(field_get:kvraft.LogEntry.term)
   return term_;
 }
 inline void LogEntry::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.LogEntry.Term)
+  // @@protoc_insertion_point(field_set:kvraft.LogEntry.term)
 }
 
 // -------------------------------------------------------------------
 
 // RequestVoteArgs
 
-// optional int32 Term = 1;
+// optional int32 term = 1;
 inline void RequestVoteArgs::clear_term() {
   term_ = 0;
 }
 inline ::google::protobuf::int32 RequestVoteArgs::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.Term)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.term)
   return term_;
 }
 inline void RequestVoteArgs::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.Term)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.term)
 }
 
-// optional int32 CandidateId = 2;
+// optional int32 candidateid = 2;
 inline void RequestVoteArgs::clear_candidateid() {
   candidateid_ = 0;
 }
 inline ::google::protobuf::int32 RequestVoteArgs::candidateid() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.CandidateId)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.candidateid)
   return candidateid_;
 }
 inline void RequestVoteArgs::set_candidateid(::google::protobuf::int32 value) {
   
   candidateid_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.CandidateId)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.candidateid)
 }
 
-// optional int32 LastLogIndex = 3;
+// optional int32 lastLogindex = 3;
 inline void RequestVoteArgs::clear_lastlogindex() {
   lastlogindex_ = 0;
 }
 inline ::google::protobuf::int32 RequestVoteArgs::lastlogindex() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.LastLogIndex)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastLogindex)
   return lastlogindex_;
 }
 inline void RequestVoteArgs::set_lastlogindex(::google::protobuf::int32 value) {
   
   lastlogindex_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.LastLogIndex)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastLogindex)
 }
 
-// optional int32 LastLogTerm = 4;
+// optional int32 lastLogterm = 4;
 inline void RequestVoteArgs::clear_lastlogterm() {
   lastlogterm_ = 0;
 }
 inline ::google::protobuf::int32 RequestVoteArgs::lastlogterm() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.LastLogTerm)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastLogterm)
   return lastlogterm_;
 }
 inline void RequestVoteArgs::set_lastlogterm(::google::protobuf::int32 value) {
   
   lastlogterm_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.LastLogTerm)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastLogterm)
 }
 
 // -------------------------------------------------------------------
 
 // RequestVoteReply
 
-// optional int32 Term = 1;
+// optional int32 term = 1;
 inline void RequestVoteReply::clear_term() {
   term_ = 0;
 }
 inline ::google::protobuf::int32 RequestVoteReply::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteReply.Term)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteReply.term)
   return term_;
 }
 inline void RequestVoteReply::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteReply.Term)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteReply.term)
 }
 
-// optional bool VoteGranted = 2;
+// optional bool votegranted = 2;
 inline void RequestVoteReply::clear_votegranted() {
   votegranted_ = false;
 }
 inline bool RequestVoteReply::votegranted() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteReply.VoteGranted)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteReply.votegranted)
   return votegranted_;
 }
 inline void RequestVoteReply::set_votegranted(bool value) {
   
   votegranted_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteReply.VoteGranted)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteReply.votegranted)
 }
 
 // -------------------------------------------------------------------
 
 // AppendEntriesArgs
 
-// optional int32 Term = 1;
+// optional int32 term = 1;
 inline void AppendEntriesArgs::clear_term() {
   term_ = 0;
 }
 inline ::google::protobuf::int32 AppendEntriesArgs::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.Term)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.term)
   return term_;
 }
 inline void AppendEntriesArgs::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.Term)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.term)
 }
 
-// optional int32 LeaderId = 2;
+// optional int32 leaderId = 2;
 inline void AppendEntriesArgs::clear_leaderid() {
   leaderid_ = 0;
 }
 inline ::google::protobuf::int32 AppendEntriesArgs::leaderid() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.LeaderId)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.leaderId)
   return leaderid_;
 }
 inline void AppendEntriesArgs::set_leaderid(::google::protobuf::int32 value) {
   
   leaderid_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.LeaderId)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.leaderId)
 }
 
-// optional int32 PrevLogIndex = 3;
+// optional int32 prevlogindex = 3;
 inline void AppendEntriesArgs::clear_prevlogindex() {
   prevlogindex_ = 0;
 }
 inline ::google::protobuf::int32 AppendEntriesArgs::prevlogindex() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.PrevLogIndex)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.prevlogindex)
   return prevlogindex_;
 }
 inline void AppendEntriesArgs::set_prevlogindex(::google::protobuf::int32 value) {
   
   prevlogindex_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.PrevLogIndex)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.prevlogindex)
 }
 
-// optional int32 PrevLogTerm = 4;
+// optional int32 prevlogterm = 4;
 inline void AppendEntriesArgs::clear_prevlogterm() {
   prevlogterm_ = 0;
 }
 inline ::google::protobuf::int32 AppendEntriesArgs::prevlogterm() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.PrevLogTerm)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.prevlogterm)
   return prevlogterm_;
 }
 inline void AppendEntriesArgs::set_prevlogterm(::google::protobuf::int32 value) {
   
   prevlogterm_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.PrevLogTerm)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.prevlogterm)
 }
 
-// optional int32 LeaderCommit = 5;
+// optional int32 leadercommit = 5;
 inline void AppendEntriesArgs::clear_leadercommit() {
   leadercommit_ = 0;
 }
 inline ::google::protobuf::int32 AppendEntriesArgs::leadercommit() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.LeaderCommit)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.leadercommit)
   return leadercommit_;
 }
 inline void AppendEntriesArgs::set_leadercommit(::google::protobuf::int32 value) {
   
   leadercommit_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.LeaderCommit)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.leadercommit)
 }
 
-// repeated .kvraft.LogEntry Entries = 6;
+// repeated .kvraft.LogEntry entries = 6;
 inline int AppendEntriesArgs::entries_size() const {
   return entries_.size();
 }
@@ -1023,25 +1394,25 @@ inline void AppendEntriesArgs::clear_entries() {
   entries_.Clear();
 }
 inline const ::kvraft::LogEntry& AppendEntriesArgs::entries(int index) const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.entries)
   return entries_.Get(index);
 }
 inline ::kvraft::LogEntry* AppendEntriesArgs::mutable_entries(int index) {
-  // @@protoc_insertion_point(field_mutable:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_mutable:kvraft.AppendEntriesArgs.entries)
   return entries_.Mutable(index);
 }
 inline ::kvraft::LogEntry* AppendEntriesArgs::add_entries() {
-  // @@protoc_insertion_point(field_add:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_add:kvraft.AppendEntriesArgs.entries)
   return entries_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::kvraft::LogEntry >*
 AppendEntriesArgs::mutable_entries() {
-  // @@protoc_insertion_point(field_mutable_list:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_mutable_list:kvraft.AppendEntriesArgs.entries)
   return &entries_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::kvraft::LogEntry >&
 AppendEntriesArgs::entries() const {
-  // @@protoc_insertion_point(field_list:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_list:kvraft.AppendEntriesArgs.entries)
   return entries_;
 }
 
@@ -1049,49 +1420,53 @@ AppendEntriesArgs::entries() const {
 
 // AppendEntriesReply
 
-// optional int32 Term = 1;
+// optional int32 term = 1;
 inline void AppendEntriesReply::clear_term() {
   term_ = 0;
 }
 inline ::google::protobuf::int32 AppendEntriesReply::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.Term)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.term)
   return term_;
 }
 inline void AppendEntriesReply::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.Term)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.term)
 }
 
-// optional bool Success = 2;
+// optional bool success = 2;
 inline void AppendEntriesReply::clear_success() {
   success_ = false;
 }
 inline bool AppendEntriesReply::success() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.Success)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.success)
   return success_;
 }
 inline void AppendEntriesReply::set_success(bool value) {
   
   success_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.Success)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.success)
 }
 
-// optional int32 ReplicatedIndex = 3;
+// optional int32 replicatedindex = 3;
 inline void AppendEntriesReply::clear_replicatedindex() {
   replicatedindex_ = 0;
 }
 inline ::google::protobuf::int32 AppendEntriesReply::replicatedindex() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.ReplicatedIndex)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.replicatedindex)
   return replicatedindex_;
 }
 inline void AppendEntriesReply::set_replicatedindex(::google::protobuf::int32 value) {
   
   replicatedindex_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.ReplicatedIndex)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.replicatedindex)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -1111,10 +1486,15 @@ inline void AppendEntriesReply::set_replicatedindex(::google::protobuf::int32 va
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::kvraft::Op_OpName> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::kvraft::Operation_OpName> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::kvraft::Op_OpName>() {
-  return ::kvraft::Op_OpName_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::kvraft::Operation_OpName>() {
+  return ::kvraft::Operation_OpName_descriptor();
+}
+template <> struct is_proto_enum< ::kvraft::KVResult> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::kvraft::KVResult>() {
+  return ::kvraft::KVResult_descriptor();
 }
 
 }  // namespace protobuf

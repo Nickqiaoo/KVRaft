@@ -40,3 +40,9 @@ int KVRaftTool::AppendEntries(phxrpc::OptMap &/* opt_map */) {
     return -1;
 }
 
+int KVRaftTool::Command(phxrpc::OptMap &/* opt_map */) {
+    printf("\n    *** Command unimplement ***\n");
+
+    return -1;
+}
+

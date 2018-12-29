@@ -28,7 +28,8 @@ const phxrpc::BaseDispatcher<KVRaftDispatcher>::URIFuncMap &KVRaftDispatcher::Ge
     static phxrpc::BaseDispatcher<KVRaftDispatcher>::URIFuncMap uri_func_map = {
         {"/kvraft/PHXEcho", &KVRaftDispatcher::PHXEcho},
         {"/kvraft/RequestVote", &KVRaftDispatcher::RequestVote},
-        {"/kvraft/AppendEntries", &KVRaftDispatcher::AppendEntries}};
+        {"/kvraft/AppendEntries", &KVRaftDispatcher::AppendEntries},
+        {"/kvraft/Command", &KVRaftDispatcher::Command}};
     return uri_func_map;
 }
 
@@ -145,6 +146,45 @@ int KVRaftDispatcher::AppendEntries(const phxrpc::BaseRequest &req, phxrpc::Base
     }
 
     phxrpc::log(LOG_DEBUG, "RETN: AppendEntries = %d", ret);
+
+    return ret;
+}
+
+int KVRaftDispatcher::Command(const phxrpc::BaseRequest &req, phxrpc::BaseResponse *const resp) {
+    dispatcher_args_->server_monitor->SvrCall(-1, "Command", 1);
+
+    int ret{-1};
+
+    kvraft::KVArgs req_pb;
+    kvraft::KVReply resp_pb;
+
+    // unpack request
+    {
+        ret = req.ToPb(&req_pb);
+        if (0 != ret) {
+            phxrpc::log(LOG_ERR, "ToPb err %d", ret);
+
+            return -EINVAL;
+        }
+    }
+
+    // logic process
+    {
+        if (0 == ret) {
+            ret = service_.Command(req_pb, &resp_pb);
+        }
+    }
+
+    // pack response
+    {
+        if (0 != resp->FromPb(resp_pb)) {
+            phxrpc::log(LOG_ERR, "FromPb err %d", ret);
+
+            return -ENOMEM;
+        }
+    }
+
+    phxrpc::log(LOG_DEBUG, "RETN: Command = %d", ret);
 
     return ret;
 }

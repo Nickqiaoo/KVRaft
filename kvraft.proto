@@ -2,49 +2,69 @@ syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 package kvraft;
 
-message Op{
+message Operation{
     enum OpName{
         GET = 0;
         PUT = 1;
         DEL = 2;
     }
-    string Key = 1;
-    string Value = 2;
+    OpName op = 1;
+    string key = 2;
+    string value = 3;
+}
+
+enum KVResult{
+    OK       = 0;
+	ErrNoKey = 1;
+	ErrTimeout = 2;
+	ErrWrongLeader = 3;
+}
+
+message KVArgs{
+    Operation command = 1;
+    int32 cliendid = 2;
+    int32 seq = 3;
+}
+
+message KVReply{
+    KVResult res = 1;
+    string value = 2;
 }
 
 message LogEntry{
-    Op Command = 1;
-    int32 Term = 2;
+    Operation command = 1;
+    int32 term = 2;
 }
 
 message RequestVoteArgs{
-    int32 Term = 1;
-    int32 CandidateId = 2;
-    int32 LastLogIndex = 3;
-    int32 LastLogTerm = 4; 
+    int32 term = 1;
+    int32 candidateid = 2;
+    int32 lastLogindex = 3;
+    int32 lastLogterm = 4; 
 }
 
 message RequestVoteReply{
-    int32 Term = 1;
-    bool VoteGranted = 2;
+    int32 term = 1;
+    bool votegranted = 2;
 }
 
 message AppendEntriesArgs{
-    int32 Term = 1;
-    int32 LeaderId = 2;
-    int32 PrevLogIndex = 3;
-    int32 PrevLogTerm = 4;
-    int32 LeaderCommit = 5;
-    repeated LogEntry Entries = 6;
+    int32 term = 1;
+    int32 leaderId = 2;
+    int32 prevlogindex = 3;
+    int32 prevlogterm = 4;
+    int32 leadercommit = 5;
+    repeated LogEntry entries = 6;
 }
 
 message AppendEntriesReply{
-    int32 Term = 1;
-    bool Success = 2;
-    int32 ReplicatedIndex = 3;
+    int32 term = 1;
+    bool success = 2;
+    int32 replicatedindex = 3;
 }
 
 service KVRaft{
     rpc RequestVote(RequestVoteArgs) returns (RequestVoteReply);
     rpc AppendEntries(AppendEntriesArgs) returns (AppendEntriesReply);
+    rpc Command(KVArgs) returns (KVReply);
 }

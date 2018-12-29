@@ -142,3 +142,24 @@ int KVRaftClient::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::Ap
     return -1;
 }
 
+int KVRaftClient::Command(const kvraft::KVArgs &req, kvraft::KVReply *resp)
+{
+    const phxrpc::Endpoint_t *ep{global_kvraftclient_config_.GetRandom()};
+
+    if (ep) {
+        phxrpc::BlockTcpStream socket;
+        bool open_ret{phxrpc::PhxrpcTcpUtils::Open(&socket, ep->ip, ep->port,
+                global_kvraftclient_config_.GetConnectTimeoutMS(), nullptr, 0,
+                *(global_kvraftclient_monitor_.get()))};
+        if (open_ret) {
+            socket.SetTimeout(global_kvraftclient_config_.GetSocketTimeoutMS());
+            phxrpc::HttpMessageHandlerFactory http_msg_factory;
+            KVRaftStub stub(socket, *(global_kvraftclient_monitor_.get()), http_msg_factory);
+            return stub.Command(req, resp);
+        }
+
+    }
+
+    return -1;
+}
+

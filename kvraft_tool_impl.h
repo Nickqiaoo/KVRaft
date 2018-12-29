@@ -26,5 +26,6 @@ class KVRaftToolImpl : public KVRaftTool {
     virtual int PHXEcho(phxrpc::OptMap &opt_map) override;
     virtual int RequestVote(phxrpc::OptMap &opt_map) override;
     virtual int AppendEntries(phxrpc::OptMap &opt_map) override;
+    virtual int Command(phxrpc::OptMap &opt_map) override;
 };
 

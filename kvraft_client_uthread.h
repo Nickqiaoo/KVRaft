@@ -24,6 +24,7 @@ class KVRaftClientUThread {
     int PHXBatchEcho(const google::protobuf::StringValue &req, google::protobuf::StringValue *resp);
     int RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp);
     int AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp);
+    int Command(const kvraft::KVArgs &req, kvraft::KVReply *resp);
 
   private:
     phxrpc::UThreadEpollScheduler *uthread_scheduler_;

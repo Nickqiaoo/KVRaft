@@ -140,3 +140,23 @@ int KVRaftClientUThread::AppendEntries(const kvraft::AppendEntriesArgs &req, kvr
     return -1;
 }
 
+int KVRaftClientUThread::Command(const kvraft::KVArgs &req, kvraft::KVReply *resp)
+{
+    const phxrpc::Endpoint_t *ep{global_kvraftclientuthread_config_.GetRandom()};
+
+    if (uthread_scheduler_ && ep) {
+        phxrpc::UThreadTcpStream socket;
+        bool open_ret{phxrpc::PhxrpcTcpUtils::Open(uthread_scheduler_, &socket, ep->ip, ep->port,
+                global_kvraftclientuthread_config_.GetConnectTimeoutMS(),
+                *(global_kvraftclientuthread_monitor_.get()))};
+        if (open_ret) {
+            socket.SetTimeout(global_kvraftclientuthread_config_.GetSocketTimeoutMS());
+            phxrpc::HttpMessageHandlerFactory http_msg_factory;
+            KVRaftStub stub(socket, *(global_kvraftclientuthread_monitor_.get()), http_msg_factory);
+            return stub.Command(req, resp);
+        }
+    }
+
+    return -1;
+}
+

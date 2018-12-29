@@ -24,6 +24,7 @@ class KVRaftDispatcher {
     int PHXEcho(const phxrpc::BaseRequest &req, phxrpc::BaseResponse *const resp);
     int RequestVote(const phxrpc::BaseRequest &req, phxrpc::BaseResponse *const resp);
     int AppendEntries(const phxrpc::BaseRequest &req, phxrpc::BaseResponse *const resp);
+    int Command(const phxrpc::BaseRequest &req, phxrpc::BaseResponse *const resp);
 
   private:
     KVRaftService &service_;

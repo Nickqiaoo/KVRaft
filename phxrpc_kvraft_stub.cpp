@@ -47,3 +47,10 @@ int KVRaftStub::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::Appe
     return caller.Call(req, resp);
 }
 
+int KVRaftStub::Command(const kvraft::KVArgs &req, kvraft::KVReply *resp) {
+    phxrpc::Caller caller(socket_, client_monitor_, msg_handler_factory_);
+    caller.set_uri("/kvraft/Command", -1);
+    caller.set_keep_alive(keep_alive_);
+    return caller.Call(req, resp);
+}
+

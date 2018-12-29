@@ -33,3 +33,8 @@ int KVRaftService::AppendEntries(const kvraft::AppendEntriesArgs &/* req */, kvr
     return -1;
 }
 
+int KVRaftService::Command(const kvraft::KVArgs &/* req */, kvraft::KVReply */* resp */) {
+    phxrpc::log(LOG_ERR, "ERROR: Command unimplemented");
+    return -1;
+}
+

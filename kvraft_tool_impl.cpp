@@ -65,3 +65,17 @@ int KVRaftToolImpl::AppendEntries(phxrpc::OptMap &opt_map) {
     return ret;
 }
 
+int KVRaftToolImpl::Command(phxrpc::OptMap &opt_map) {
+    kvraft::KVArgs req;
+    kvraft::KVReply resp;
+
+    // TODO: fill req from opt_map
+
+    KVRaftClient client;
+    int ret{client.Command(req, &resp)};
+    printf("%s return %d\n", __func__, ret);
+    printf("resp: {\n%s}\n", resp.DebugString().c_str());
+
+    return ret;
+}
+

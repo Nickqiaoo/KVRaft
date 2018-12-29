@@ -21,10 +21,16 @@ namespace kvraft {
 
 namespace {
 
-const ::google::protobuf::Descriptor* Op_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* Operation_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Op_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* Op_OpName_descriptor_ = NULL;
+  Operation_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* Operation_OpName_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* KVArgs_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  KVArgs_reflection_ = NULL;
+const ::google::protobuf::Descriptor* KVReply_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  KVReply_reflection_ = NULL;
 const ::google::protobuf::Descriptor* LogEntry_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   LogEntry_reflection_ = NULL;
@@ -40,6 +46,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* AppendEntriesReply_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AppendEntriesReply_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* KVResult_descriptor_ = NULL;
 
 }  // namespace
 
@@ -51,24 +58,58 @@ void protobuf_AssignDesc_kvraft_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "kvraft.proto");
   GOOGLE_CHECK(file != NULL);
-  Op_descriptor_ = file->message_type(0);
-  static const int Op_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Op, key_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Op, value_),
+  Operation_descriptor_ = file->message_type(0);
+  static const int Operation_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Operation, op_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Operation, key_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Operation, value_),
   };
-  Op_reflection_ =
+  Operation_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      Op_descriptor_,
-      Op::default_instance_,
-      Op_offsets_,
+      Operation_descriptor_,
+      Operation::default_instance_,
+      Operation_offsets_,
       -1,
       -1,
       -1,
-      sizeof(Op),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Op, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Op, _is_default_instance_));
-  Op_OpName_descriptor_ = Op_descriptor_->enum_type(0);
-  LogEntry_descriptor_ = file->message_type(1);
+      sizeof(Operation),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Operation, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Operation, _is_default_instance_));
+  Operation_OpName_descriptor_ = Operation_descriptor_->enum_type(0);
+  KVArgs_descriptor_ = file->message_type(1);
+  static const int KVArgs_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVArgs, command_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVArgs, cliendid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVArgs, seq_),
+  };
+  KVArgs_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      KVArgs_descriptor_,
+      KVArgs::default_instance_,
+      KVArgs_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(KVArgs),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVArgs, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVArgs, _is_default_instance_));
+  KVReply_descriptor_ = file->message_type(2);
+  static const int KVReply_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVReply, res_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVReply, value_),
+  };
+  KVReply_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      KVReply_descriptor_,
+      KVReply::default_instance_,
+      KVReply_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(KVReply),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVReply, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVReply, _is_default_instance_));
+  LogEntry_descriptor_ = file->message_type(3);
   static const int LogEntry_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LogEntry, command_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LogEntry, term_),
@@ -84,7 +125,7 @@ void protobuf_AssignDesc_kvraft_2eproto() {
       sizeof(LogEntry),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LogEntry, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LogEntry, _is_default_instance_));
-  RequestVoteArgs_descriptor_ = file->message_type(2);
+  RequestVoteArgs_descriptor_ = file->message_type(4);
   static const int RequestVoteArgs_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestVoteArgs, term_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestVoteArgs, candidateid_),
@@ -102,7 +143,7 @@ void protobuf_AssignDesc_kvraft_2eproto() {
       sizeof(RequestVoteArgs),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestVoteArgs, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestVoteArgs, _is_default_instance_));
-  RequestVoteReply_descriptor_ = file->message_type(3);
+  RequestVoteReply_descriptor_ = file->message_type(5);
   static const int RequestVoteReply_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestVoteReply, term_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestVoteReply, votegranted_),
@@ -118,7 +159,7 @@ void protobuf_AssignDesc_kvraft_2eproto() {
       sizeof(RequestVoteReply),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestVoteReply, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RequestVoteReply, _is_default_instance_));
-  AppendEntriesArgs_descriptor_ = file->message_type(4);
+  AppendEntriesArgs_descriptor_ = file->message_type(6);
   static const int AppendEntriesArgs_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesArgs, term_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesArgs, leaderid_),
@@ -138,7 +179,7 @@ void protobuf_AssignDesc_kvraft_2eproto() {
       sizeof(AppendEntriesArgs),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesArgs, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesArgs, _is_default_instance_));
-  AppendEntriesReply_descriptor_ = file->message_type(5);
+  AppendEntriesReply_descriptor_ = file->message_type(7);
   static const int AppendEntriesReply_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesReply, term_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesReply, success_),
@@ -155,6 +196,7 @@ void protobuf_AssignDesc_kvraft_2eproto() {
       sizeof(AppendEntriesReply),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesReply, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesReply, _is_default_instance_));
+  KVResult_descriptor_ = file->enum_type(0);
 }
 
 namespace {
@@ -169,7 +211,11 @@ void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      Op_descriptor_, &Op::default_instance());
+      Operation_descriptor_, &Operation::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      KVArgs_descriptor_, &KVArgs::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      KVReply_descriptor_, &KVReply::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       LogEntry_descriptor_, &LogEntry::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -185,8 +231,12 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_kvraft_2eproto() {
-  delete Op::default_instance_;
-  delete Op_reflection_;
+  delete Operation::default_instance_;
+  delete Operation_reflection_;
+  delete KVArgs::default_instance_;
+  delete KVArgs_reflection_;
+  delete KVReply::default_instance_;
+  delete KVReply_reflection_;
   delete LogEntry::default_instance_;
   delete LogEntry_reflection_;
   delete RequestVoteArgs::default_instance_;
@@ -209,33 +259,44 @@ void protobuf_AddDesc_kvraft_2eproto() {
   ::google::protobuf::protobuf_AddDesc_google_2fprotobuf_2fwrappers_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\014kvraft.proto\022\006kvraft\032\036google/protobuf/"
-    "wrappers.proto\"E\n\002Op\022\013\n\003Key\030\001 \001(\t\022\r\n\005Val"
-    "ue\030\002 \001(\t\"#\n\006OpName\022\007\n\003GET\020\000\022\007\n\003PUT\020\001\022\007\n\003"
-    "DEL\020\002\"5\n\010LogEntry\022\033\n\007Command\030\001 \001(\0132\n.kvr"
-    "aft.Op\022\014\n\004Term\030\002 \001(\005\"_\n\017RequestVoteArgs\022"
-    "\014\n\004Term\030\001 \001(\005\022\023\n\013CandidateId\030\002 \001(\005\022\024\n\014La"
-    "stLogIndex\030\003 \001(\005\022\023\n\013LastLogTerm\030\004 \001(\005\"5\n"
-    "\020RequestVoteReply\022\014\n\004Term\030\001 \001(\005\022\023\n\013VoteG"
-    "ranted\030\002 \001(\010\"\227\001\n\021AppendEntriesArgs\022\014\n\004Te"
-    "rm\030\001 \001(\005\022\020\n\010LeaderId\030\002 \001(\005\022\024\n\014PrevLogInd"
-    "ex\030\003 \001(\005\022\023\n\013PrevLogTerm\030\004 \001(\005\022\024\n\014LeaderC"
-    "ommit\030\005 \001(\005\022!\n\007Entries\030\006 \003(\0132\020.kvraft.Lo"
-    "gEntry\"L\n\022AppendEntriesReply\022\014\n\004Term\030\001 \001"
-    "(\005\022\017\n\007Success\030\002 \001(\010\022\027\n\017ReplicatedIndex\030\003"
-    " \001(\0052\222\001\n\006KVRaft\022@\n\013RequestVote\022\027.kvraft."
-    "RequestVoteArgs\032\030.kvraft.RequestVoteRepl"
-    "y\022F\n\rAppendEntries\022\031.kvraft.AppendEntrie"
-    "sArgs\032\032.kvraft.AppendEntriesReplyb\006proto"
-    "3", 721);
+    "wrappers.proto\"r\n\tOperation\022$\n\002op\030\001 \001(\0162"
+    "\030.kvraft.Operation.OpName\022\013\n\003key\030\002 \001(\t\022\r"
+    "\n\005value\030\003 \001(\t\"#\n\006OpName\022\007\n\003GET\020\000\022\007\n\003PUT\020"
+    "\001\022\007\n\003DEL\020\002\"K\n\006KVArgs\022\"\n\007command\030\001 \001(\0132\021."
+    "kvraft.Operation\022\020\n\010cliendid\030\002 \001(\005\022\013\n\003se"
+    "q\030\003 \001(\005\"7\n\007KVReply\022\035\n\003res\030\001 \001(\0162\020.kvraft"
+    ".KVResult\022\r\n\005value\030\002 \001(\t\"<\n\010LogEntry\022\"\n\007"
+    "command\030\001 \001(\0132\021.kvraft.Operation\022\014\n\004term"
+    "\030\002 \001(\005\"_\n\017RequestVoteArgs\022\014\n\004term\030\001 \001(\005\022"
+    "\023\n\013candidateid\030\002 \001(\005\022\024\n\014lastLogindex\030\003 \001"
+    "(\005\022\023\n\013lastLogterm\030\004 \001(\005\"5\n\020RequestVoteRe"
+    "ply\022\014\n\004term\030\001 \001(\005\022\023\n\013votegranted\030\002 \001(\010\"\227"
+    "\001\n\021AppendEntriesArgs\022\014\n\004term\030\001 \001(\005\022\020\n\010le"
+    "aderId\030\002 \001(\005\022\024\n\014prevlogindex\030\003 \001(\005\022\023\n\013pr"
+    "evlogterm\030\004 \001(\005\022\024\n\014leadercommit\030\005 \001(\005\022!\n"
+    "\007entries\030\006 \003(\0132\020.kvraft.LogEntry\"L\n\022Appe"
+    "ndEntriesReply\022\014\n\004term\030\001 \001(\005\022\017\n\007success\030"
+    "\002 \001(\010\022\027\n\017replicatedindex\030\003 \001(\005*D\n\010KVResu"
+    "lt\022\006\n\002OK\020\000\022\014\n\010ErrNoKey\020\001\022\016\n\nErrTimeout\020\002"
+    "\022\022\n\016ErrWrongLeader\020\0032\276\001\n\006KVRaft\022@\n\013Reque"
+    "stVote\022\027.kvraft.RequestVoteArgs\032\030.kvraft"
+    ".RequestVoteReply\022F\n\rAppendEntries\022\031.kvr"
+    "aft.AppendEntriesArgs\032\032.kvraft.AppendEnt"
+    "riesReply\022*\n\007Command\022\016.kvraft.KVArgs\032\017.k"
+    "vraft.KVReplyb\006proto3", 1021);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "kvraft.proto", &protobuf_RegisterTypes);
-  Op::default_instance_ = new Op();
+  Operation::default_instance_ = new Operation();
+  KVArgs::default_instance_ = new KVArgs();
+  KVReply::default_instance_ = new KVReply();
   LogEntry::default_instance_ = new LogEntry();
   RequestVoteArgs::default_instance_ = new RequestVoteArgs();
   RequestVoteReply::default_instance_ = new RequestVoteReply();
   AppendEntriesArgs::default_instance_ = new AppendEntriesArgs();
   AppendEntriesReply::default_instance_ = new AppendEntriesReply();
-  Op::default_instance_->InitAsDefaultInstance();
+  Operation::default_instance_->InitAsDefaultInstance();
+  KVArgs::default_instance_->InitAsDefaultInstance();
+  KVReply::default_instance_->InitAsDefaultInstance();
   LogEntry::default_instance_->InitAsDefaultInstance();
   RequestVoteArgs::default_instance_->InitAsDefaultInstance();
   RequestVoteReply::default_instance_->InitAsDefaultInstance();
@@ -250,14 +311,30 @@ struct StaticDescriptorInitializer_kvraft_2eproto {
     protobuf_AddDesc_kvraft_2eproto();
   }
 } static_descriptor_initializer_kvraft_2eproto_;
+const ::google::protobuf::EnumDescriptor* KVResult_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return KVResult_descriptor_;
+}
+bool KVResult_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* Op_OpName_descriptor() {
+const ::google::protobuf::EnumDescriptor* Operation_OpName_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Op_OpName_descriptor_;
+  return Operation_OpName_descriptor_;
 }
-bool Op_OpName_IsValid(int value) {
+bool Operation_OpName_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -269,123 +346,142 @@ bool Op_OpName_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const Op_OpName Op::GET;
-const Op_OpName Op::PUT;
-const Op_OpName Op::DEL;
-const Op_OpName Op::OpName_MIN;
-const Op_OpName Op::OpName_MAX;
-const int Op::OpName_ARRAYSIZE;
+const Operation_OpName Operation::GET;
+const Operation_OpName Operation::PUT;
+const Operation_OpName Operation::DEL;
+const Operation_OpName Operation::OpName_MIN;
+const Operation_OpName Operation::OpName_MAX;
+const int Operation::OpName_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Op::kKeyFieldNumber;
-const int Op::kValueFieldNumber;
+const int Operation::kOpFieldNumber;
+const int Operation::kKeyFieldNumber;
+const int Operation::kValueFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-Op::Op()
+Operation::Operation()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:kvraft.Op)
+  // @@protoc_insertion_point(constructor:kvraft.Operation)
 }
 
-void Op::InitAsDefaultInstance() {
+void Operation::InitAsDefaultInstance() {
   _is_default_instance_ = true;
 }
 
-Op::Op(const Op& from)
+Operation::Operation(const Operation& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:kvraft.Op)
+  // @@protoc_insertion_point(copy_constructor:kvraft.Operation)
 }
 
-void Op::SharedCtor() {
+void Operation::SharedCtor() {
     _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
+  op_ = 0;
   key_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   value_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-Op::~Op() {
-  // @@protoc_insertion_point(destructor:kvraft.Op)
+Operation::~Operation() {
+  // @@protoc_insertion_point(destructor:kvraft.Operation)
   SharedDtor();
 }
 
-void Op::SharedDtor() {
+void Operation::SharedDtor() {
   key_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   value_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
 
-void Op::SetCachedSize(int size) const {
+void Operation::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* Op::descriptor() {
+const ::google::protobuf::Descriptor* Operation::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Op_descriptor_;
+  return Operation_descriptor_;
 }
 
-const Op& Op::default_instance() {
+const Operation& Operation::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_kvraft_2eproto();
   return *default_instance_;
 }
 
-Op* Op::default_instance_ = NULL;
+Operation* Operation::default_instance_ = NULL;
 
-Op* Op::New(::google::protobuf::Arena* arena) const {
-  Op* n = new Op;
+Operation* Operation::New(::google::protobuf::Arena* arena) const {
+  Operation* n = new Operation;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void Op::Clear() {
-// @@protoc_insertion_point(message_clear_start:kvraft.Op)
+void Operation::Clear() {
+// @@protoc_insertion_point(message_clear_start:kvraft.Operation)
+  op_ = 0;
   key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-bool Op::MergePartialFromCodedStream(
+bool Operation::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:kvraft.Op)
+  // @@protoc_insertion_point(parse_start:kvraft.Operation)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string Key = 1;
+      // optional .kvraft.Operation.OpName op = 1;
       case 1: {
-        if (tag == 10) {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_op(static_cast< ::kvraft::Operation_OpName >(value));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_key;
+        break;
+      }
+
+      // optional string key = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_key:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_key()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->key().data(), this->key().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "kvraft.Op.Key"));
+            "kvraft.Operation.key"));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_Value;
+        if (input->ExpectTag(26)) goto parse_value;
         break;
       }
 
-      // optional string Value = 2;
-      case 2: {
-        if (tag == 18) {
-         parse_Value:
+      // optional string value = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_value:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_value()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->value().data(), this->value().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "kvraft.Op.Value"));
+            "kvraft.Operation.value"));
         } else {
           goto handle_unusual;
         }
@@ -406,81 +502,99 @@ bool Op::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:kvraft.Op)
+  // @@protoc_insertion_point(parse_success:kvraft.Operation)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:kvraft.Op)
+  // @@protoc_insertion_point(parse_failure:kvraft.Operation)
   return false;
 #undef DO_
 }
 
-void Op::SerializeWithCachedSizes(
+void Operation::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:kvraft.Op)
-  // optional string Key = 1;
+  // @@protoc_insertion_point(serialize_start:kvraft.Operation)
+  // optional .kvraft.Operation.OpName op = 1;
+  if (this->op() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->op(), output);
+  }
+
+  // optional string key = 2;
   if (this->key().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->key().data(), this->key().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "kvraft.Op.Key");
+      "kvraft.Operation.key");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->key(), output);
+      2, this->key(), output);
   }
 
-  // optional string Value = 2;
+  // optional string value = 3;
   if (this->value().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->value().data(), this->value().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "kvraft.Op.Value");
+      "kvraft.Operation.value");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->value(), output);
+      3, this->value(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:kvraft.Op)
+  // @@protoc_insertion_point(serialize_end:kvraft.Operation)
 }
 
-::google::protobuf::uint8* Op::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* Operation::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:kvraft.Op)
-  // optional string Key = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:kvraft.Operation)
+  // optional .kvraft.Operation.OpName op = 1;
+  if (this->op() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->op(), target);
+  }
+
+  // optional string key = 2;
   if (this->key().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->key().data(), this->key().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "kvraft.Op.Key");
+      "kvraft.Operation.key");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->key(), target);
+        2, this->key(), target);
   }
 
-  // optional string Value = 2;
+  // optional string value = 3;
   if (this->value().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->value().data(), this->value().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "kvraft.Op.Value");
+      "kvraft.Operation.value");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->value(), target);
+        3, this->value(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:kvraft.Op)
+  // @@protoc_insertion_point(serialize_to_array_end:kvraft.Operation)
   return target;
 }
 
-int Op::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:kvraft.Op)
+int Operation::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:kvraft.Operation)
   int total_size = 0;
 
-  // optional string Key = 1;
+  // optional .kvraft.Operation.OpName op = 1;
+  if (this->op() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->op());
+  }
+
+  // optional string key = 2;
   if (this->key().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->key());
   }
 
-  // optional string Value = 2;
+  // optional string value = 3;
   if (this->value().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -493,27 +607,30 @@ int Op::ByteSize() const {
   return total_size;
 }
 
-void Op::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:kvraft.Op)
+void Operation::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:kvraft.Operation)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  const Op* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const Op>(
+  const Operation* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Operation>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:kvraft.Op)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:kvraft.Operation)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:kvraft.Op)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:kvraft.Operation)
     MergeFrom(*source);
   }
 }
 
-void Op::MergeFrom(const Op& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:kvraft.Op)
+void Operation::MergeFrom(const Operation& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:kvraft.Operation)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.op() != 0) {
+    set_op(from.op());
   }
   if (from.key().size() > 0) {
 
@@ -525,133 +642,878 @@ void Op::MergeFrom(const Op& from) {
   }
 }
 
-void Op::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:kvraft.Op)
+void Operation::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:kvraft.Operation)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Op::CopyFrom(const Op& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:kvraft.Op)
+void Operation::CopyFrom(const Operation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:kvraft.Operation)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Op::IsInitialized() const {
+bool Operation::IsInitialized() const {
 
   return true;
 }
 
-void Op::Swap(Op* other) {
+void Operation::Swap(Operation* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void Op::InternalSwap(Op* other) {
+void Operation::InternalSwap(Operation* other) {
+  std::swap(op_, other->op_);
   key_.Swap(&other->key_);
   value_.Swap(&other->value_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata Op::GetMetadata() const {
+::google::protobuf::Metadata Operation::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = Op_descriptor_;
-  metadata.reflection = Op_reflection_;
+  metadata.descriptor = Operation_descriptor_;
+  metadata.reflection = Operation_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Op
+// Operation
 
-// optional string Key = 1;
-void Op::clear_key() {
+// optional .kvraft.Operation.OpName op = 1;
+void Operation::clear_op() {
+  op_ = 0;
+}
+ ::kvraft::Operation_OpName Operation::op() const {
+  // @@protoc_insertion_point(field_get:kvraft.Operation.op)
+  return static_cast< ::kvraft::Operation_OpName >(op_);
+}
+ void Operation::set_op(::kvraft::Operation_OpName value) {
+  
+  op_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.Operation.op)
+}
+
+// optional string key = 2;
+void Operation::clear_key() {
   key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- const ::std::string& Op::key() const {
-  // @@protoc_insertion_point(field_get:kvraft.Op.Key)
+ const ::std::string& Operation::key() const {
+  // @@protoc_insertion_point(field_get:kvraft.Operation.key)
   return key_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void Op::set_key(const ::std::string& value) {
+ void Operation::set_key(const ::std::string& value) {
   
   key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_set:kvraft.Operation.key)
 }
- void Op::set_key(const char* value) {
+ void Operation::set_key(const char* value) {
   
   key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_set_char:kvraft.Operation.key)
 }
- void Op::set_key(const char* value, size_t size) {
+ void Operation::set_key(const char* value, size_t size) {
   
   key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_set_pointer:kvraft.Operation.key)
 }
- ::std::string* Op::mutable_key() {
+ ::std::string* Operation::mutable_key() {
   
-  // @@protoc_insertion_point(field_mutable:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_mutable:kvraft.Operation.key)
   return key_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::std::string* Op::release_key() {
-  // @@protoc_insertion_point(field_release:kvraft.Op.Key)
+ ::std::string* Operation::release_key() {
+  // @@protoc_insertion_point(field_release:kvraft.Operation.key)
   
   return key_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void Op::set_allocated_key(::std::string* key) {
+ void Operation::set_allocated_key(::std::string* key) {
   if (key != NULL) {
     
   } else {
     
   }
   key_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), key);
-  // @@protoc_insertion_point(field_set_allocated:kvraft.Op.Key)
+  // @@protoc_insertion_point(field_set_allocated:kvraft.Operation.key)
 }
 
-// optional string Value = 2;
-void Op::clear_value() {
+// optional string value = 3;
+void Operation::clear_value() {
   value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- const ::std::string& Op::value() const {
-  // @@protoc_insertion_point(field_get:kvraft.Op.Value)
+ const ::std::string& Operation::value() const {
+  // @@protoc_insertion_point(field_get:kvraft.Operation.value)
   return value_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void Op::set_value(const ::std::string& value) {
+ void Operation::set_value(const ::std::string& value) {
   
   value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_set:kvraft.Operation.value)
 }
- void Op::set_value(const char* value) {
+ void Operation::set_value(const char* value) {
   
   value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_set_char:kvraft.Operation.value)
 }
- void Op::set_value(const char* value, size_t size) {
+ void Operation::set_value(const char* value, size_t size) {
   
   value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_set_pointer:kvraft.Operation.value)
 }
- ::std::string* Op::mutable_value() {
+ ::std::string* Operation::mutable_value() {
   
-  // @@protoc_insertion_point(field_mutable:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_mutable:kvraft.Operation.value)
   return value_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::std::string* Op::release_value() {
-  // @@protoc_insertion_point(field_release:kvraft.Op.Value)
+ ::std::string* Operation::release_value() {
+  // @@protoc_insertion_point(field_release:kvraft.Operation.value)
   
   return value_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void Op::set_allocated_value(::std::string* value) {
+ void Operation::set_allocated_value(::std::string* value) {
   if (value != NULL) {
     
   } else {
     
   }
   value_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set_allocated:kvraft.Op.Value)
+  // @@protoc_insertion_point(field_set_allocated:kvraft.Operation.value)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int KVArgs::kCommandFieldNumber;
+const int KVArgs::kCliendidFieldNumber;
+const int KVArgs::kSeqFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+KVArgs::KVArgs()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:kvraft.KVArgs)
+}
+
+void KVArgs::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+  command_ = const_cast< ::kvraft::Operation*>(&::kvraft::Operation::default_instance());
+}
+
+KVArgs::KVArgs(const KVArgs& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:kvraft.KVArgs)
+}
+
+void KVArgs::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  command_ = NULL;
+  cliendid_ = 0;
+  seq_ = 0;
+}
+
+KVArgs::~KVArgs() {
+  // @@protoc_insertion_point(destructor:kvraft.KVArgs)
+  SharedDtor();
+}
+
+void KVArgs::SharedDtor() {
+  if (this != default_instance_) {
+    delete command_;
+  }
+}
+
+void KVArgs::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* KVArgs::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return KVArgs_descriptor_;
+}
+
+const KVArgs& KVArgs::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_kvraft_2eproto();
+  return *default_instance_;
+}
+
+KVArgs* KVArgs::default_instance_ = NULL;
+
+KVArgs* KVArgs::New(::google::protobuf::Arena* arena) const {
+  KVArgs* n = new KVArgs;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void KVArgs::Clear() {
+// @@protoc_insertion_point(message_clear_start:kvraft.KVArgs)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(KVArgs, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<KVArgs*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(cliendid_, seq_);
+  if (GetArenaNoVirtual() == NULL && command_ != NULL) delete command_;
+  command_ = NULL;
+
+#undef ZR_HELPER_
+#undef ZR_
+
+}
+
+bool KVArgs::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:kvraft.KVArgs)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .kvraft.Operation command = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_command()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_cliendid;
+        break;
+      }
+
+      // optional int32 cliendid = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_cliendid:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &cliendid_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_seq;
+        break;
+      }
+
+      // optional int32 seq = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_seq:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &seq_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:kvraft.KVArgs)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:kvraft.KVArgs)
+  return false;
+#undef DO_
+}
+
+void KVArgs::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:kvraft.KVArgs)
+  // optional .kvraft.Operation command = 1;
+  if (this->has_command()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, *this->command_, output);
+  }
+
+  // optional int32 cliendid = 2;
+  if (this->cliendid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->cliendid(), output);
+  }
+
+  // optional int32 seq = 3;
+  if (this->seq() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->seq(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:kvraft.KVArgs)
+}
+
+::google::protobuf::uint8* KVArgs::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:kvraft.KVArgs)
+  // optional .kvraft.Operation command = 1;
+  if (this->has_command()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        1, *this->command_, false, target);
+  }
+
+  // optional int32 cliendid = 2;
+  if (this->cliendid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->cliendid(), target);
+  }
+
+  // optional int32 seq = 3;
+  if (this->seq() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->seq(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:kvraft.KVArgs)
+  return target;
+}
+
+int KVArgs::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:kvraft.KVArgs)
+  int total_size = 0;
+
+  // optional .kvraft.Operation command = 1;
+  if (this->has_command()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->command_);
+  }
+
+  // optional int32 cliendid = 2;
+  if (this->cliendid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->cliendid());
+  }
+
+  // optional int32 seq = 3;
+  if (this->seq() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->seq());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void KVArgs::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:kvraft.KVArgs)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const KVArgs* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const KVArgs>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:kvraft.KVArgs)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:kvraft.KVArgs)
+    MergeFrom(*source);
+  }
+}
+
+void KVArgs::MergeFrom(const KVArgs& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:kvraft.KVArgs)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.has_command()) {
+    mutable_command()->::kvraft::Operation::MergeFrom(from.command());
+  }
+  if (from.cliendid() != 0) {
+    set_cliendid(from.cliendid());
+  }
+  if (from.seq() != 0) {
+    set_seq(from.seq());
+  }
+}
+
+void KVArgs::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:kvraft.KVArgs)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void KVArgs::CopyFrom(const KVArgs& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:kvraft.KVArgs)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool KVArgs::IsInitialized() const {
+
+  return true;
+}
+
+void KVArgs::Swap(KVArgs* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void KVArgs::InternalSwap(KVArgs* other) {
+  std::swap(command_, other->command_);
+  std::swap(cliendid_, other->cliendid_);
+  std::swap(seq_, other->seq_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata KVArgs::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = KVArgs_descriptor_;
+  metadata.reflection = KVArgs_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// KVArgs
+
+// optional .kvraft.Operation command = 1;
+bool KVArgs::has_command() const {
+  return !_is_default_instance_ && command_ != NULL;
+}
+void KVArgs::clear_command() {
+  if (GetArenaNoVirtual() == NULL && command_ != NULL) delete command_;
+  command_ = NULL;
+}
+const ::kvraft::Operation& KVArgs::command() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVArgs.command)
+  return command_ != NULL ? *command_ : *default_instance_->command_;
+}
+::kvraft::Operation* KVArgs::mutable_command() {
+  
+  if (command_ == NULL) {
+    command_ = new ::kvraft::Operation;
+  }
+  // @@protoc_insertion_point(field_mutable:kvraft.KVArgs.command)
+  return command_;
+}
+::kvraft::Operation* KVArgs::release_command() {
+  // @@protoc_insertion_point(field_release:kvraft.KVArgs.command)
+  
+  ::kvraft::Operation* temp = command_;
+  command_ = NULL;
+  return temp;
+}
+void KVArgs::set_allocated_command(::kvraft::Operation* command) {
+  delete command_;
+  command_ = command;
+  if (command) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:kvraft.KVArgs.command)
+}
+
+// optional int32 cliendid = 2;
+void KVArgs::clear_cliendid() {
+  cliendid_ = 0;
+}
+ ::google::protobuf::int32 KVArgs::cliendid() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVArgs.cliendid)
+  return cliendid_;
+}
+ void KVArgs::set_cliendid(::google::protobuf::int32 value) {
+  
+  cliendid_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.KVArgs.cliendid)
+}
+
+// optional int32 seq = 3;
+void KVArgs::clear_seq() {
+  seq_ = 0;
+}
+ ::google::protobuf::int32 KVArgs::seq() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVArgs.seq)
+  return seq_;
+}
+ void KVArgs::set_seq(::google::protobuf::int32 value) {
+  
+  seq_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.KVArgs.seq)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int KVReply::kResFieldNumber;
+const int KVReply::kValueFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+KVReply::KVReply()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:kvraft.KVReply)
+}
+
+void KVReply::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+KVReply::KVReply(const KVReply& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:kvraft.KVReply)
+}
+
+void KVReply::SharedCtor() {
+    _is_default_instance_ = false;
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  res_ = 0;
+  value_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+KVReply::~KVReply() {
+  // @@protoc_insertion_point(destructor:kvraft.KVReply)
+  SharedDtor();
+}
+
+void KVReply::SharedDtor() {
+  value_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != default_instance_) {
+  }
+}
+
+void KVReply::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* KVReply::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return KVReply_descriptor_;
+}
+
+const KVReply& KVReply::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_kvraft_2eproto();
+  return *default_instance_;
+}
+
+KVReply* KVReply::default_instance_ = NULL;
+
+KVReply* KVReply::New(::google::protobuf::Arena* arena) const {
+  KVReply* n = new KVReply;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void KVReply::Clear() {
+// @@protoc_insertion_point(message_clear_start:kvraft.KVReply)
+  res_ = 0;
+  value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+bool KVReply::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:kvraft.KVReply)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .kvraft.KVResult res = 1;
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_res(static_cast< ::kvraft::KVResult >(value));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_value;
+        break;
+      }
+
+      // optional string value = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_value:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_value()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->value().data(), this->value().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "kvraft.KVReply.value"));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:kvraft.KVReply)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:kvraft.KVReply)
+  return false;
+#undef DO_
+}
+
+void KVReply::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:kvraft.KVReply)
+  // optional .kvraft.KVResult res = 1;
+  if (this->res() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->res(), output);
+  }
+
+  // optional string value = 2;
+  if (this->value().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->value().data(), this->value().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "kvraft.KVReply.value");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->value(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:kvraft.KVReply)
+}
+
+::google::protobuf::uint8* KVReply::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:kvraft.KVReply)
+  // optional .kvraft.KVResult res = 1;
+  if (this->res() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->res(), target);
+  }
+
+  // optional string value = 2;
+  if (this->value().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->value().data(), this->value().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "kvraft.KVReply.value");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->value(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:kvraft.KVReply)
+  return target;
+}
+
+int KVReply::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:kvraft.KVReply)
+  int total_size = 0;
+
+  // optional .kvraft.KVResult res = 1;
+  if (this->res() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->res());
+  }
+
+  // optional string value = 2;
+  if (this->value().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->value());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void KVReply::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:kvraft.KVReply)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const KVReply* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const KVReply>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:kvraft.KVReply)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:kvraft.KVReply)
+    MergeFrom(*source);
+  }
+}
+
+void KVReply::MergeFrom(const KVReply& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:kvraft.KVReply)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.res() != 0) {
+    set_res(from.res());
+  }
+  if (from.value().size() > 0) {
+
+    value_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.value_);
+  }
+}
+
+void KVReply::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:kvraft.KVReply)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void KVReply::CopyFrom(const KVReply& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:kvraft.KVReply)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool KVReply::IsInitialized() const {
+
+  return true;
+}
+
+void KVReply::Swap(KVReply* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void KVReply::InternalSwap(KVReply* other) {
+  std::swap(res_, other->res_);
+  value_.Swap(&other->value_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata KVReply::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = KVReply_descriptor_;
+  metadata.reflection = KVReply_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// KVReply
+
+// optional .kvraft.KVResult res = 1;
+void KVReply::clear_res() {
+  res_ = 0;
+}
+ ::kvraft::KVResult KVReply::res() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVReply.res)
+  return static_cast< ::kvraft::KVResult >(res_);
+}
+ void KVReply::set_res(::kvraft::KVResult value) {
+  
+  res_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.KVReply.res)
+}
+
+// optional string value = 2;
+void KVReply::clear_value() {
+  value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ const ::std::string& KVReply::value() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVReply.value)
+  return value_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void KVReply::set_value(const ::std::string& value) {
+  
+  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:kvraft.KVReply.value)
+}
+ void KVReply::set_value(const char* value) {
+  
+  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:kvraft.KVReply.value)
+}
+ void KVReply::set_value(const char* value, size_t size) {
+  
+  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:kvraft.KVReply.value)
+}
+ ::std::string* KVReply::mutable_value() {
+  
+  // @@protoc_insertion_point(field_mutable:kvraft.KVReply.value)
+  return value_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* KVReply::release_value() {
+  // @@protoc_insertion_point(field_release:kvraft.KVReply.value)
+  
+  return value_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void KVReply::set_allocated_value(::std::string* value) {
+  if (value != NULL) {
+    
+  } else {
+    
+  }
+  value_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set_allocated:kvraft.KVReply.value)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -671,7 +1533,7 @@ LogEntry::LogEntry()
 
 void LogEntry::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  command_ = const_cast< ::kvraft::Op*>(&::kvraft::Op::default_instance());
+  command_ = const_cast< ::kvraft::Operation*>(&::kvraft::Operation::default_instance());
 }
 
 LogEntry::LogEntry(const LogEntry& from)
@@ -742,7 +1604,7 @@ bool LogEntry::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .kvraft.Op Command = 1;
+      // optional .kvraft.Operation command = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -750,14 +1612,14 @@ bool LogEntry::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_Term;
+        if (input->ExpectTag(16)) goto parse_term;
         break;
       }
 
-      // optional int32 Term = 2;
+      // optional int32 term = 2;
       case 2: {
         if (tag == 16) {
-         parse_Term:
+         parse_term:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &term_)));
@@ -793,13 +1655,13 @@ failure:
 void LogEntry::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:kvraft.LogEntry)
-  // optional .kvraft.Op Command = 1;
+  // optional .kvraft.Operation command = 1;
   if (this->has_command()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, *this->command_, output);
   }
 
-  // optional int32 Term = 2;
+  // optional int32 term = 2;
   if (this->term() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->term(), output);
   }
@@ -810,14 +1672,14 @@ void LogEntry::SerializeWithCachedSizes(
 ::google::protobuf::uint8* LogEntry::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:kvraft.LogEntry)
-  // optional .kvraft.Op Command = 1;
+  // optional .kvraft.Operation command = 1;
   if (this->has_command()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
         1, *this->command_, false, target);
   }
 
-  // optional int32 Term = 2;
+  // optional int32 term = 2;
   if (this->term() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->term(), target);
   }
@@ -830,14 +1692,14 @@ int LogEntry::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:kvraft.LogEntry)
   int total_size = 0;
 
-  // optional .kvraft.Op Command = 1;
+  // optional .kvraft.Operation command = 1;
   if (this->has_command()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->command_);
   }
 
-  // optional int32 Term = 2;
+  // optional int32 term = 2;
   if (this->term() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -873,7 +1735,7 @@ void LogEntry::MergeFrom(const LogEntry& from) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
   if (from.has_command()) {
-    mutable_command()->::kvraft::Op::MergeFrom(from.command());
+    mutable_command()->::kvraft::Operation::MergeFrom(from.command());
   }
   if (from.term() != 0) {
     set_term(from.term());
@@ -921,7 +1783,7 @@ void LogEntry::InternalSwap(LogEntry* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // LogEntry
 
-// optional .kvraft.Op Command = 1;
+// optional .kvraft.Operation command = 1;
 bool LogEntry::has_command() const {
   return !_is_default_instance_ && command_ != NULL;
 }
@@ -929,26 +1791,26 @@ void LogEntry::clear_command() {
   if (GetArenaNoVirtual() == NULL && command_ != NULL) delete command_;
   command_ = NULL;
 }
-const ::kvraft::Op& LogEntry::command() const {
-  // @@protoc_insertion_point(field_get:kvraft.LogEntry.Command)
+const ::kvraft::Operation& LogEntry::command() const {
+  // @@protoc_insertion_point(field_get:kvraft.LogEntry.command)
   return command_ != NULL ? *command_ : *default_instance_->command_;
 }
-::kvraft::Op* LogEntry::mutable_command() {
+::kvraft::Operation* LogEntry::mutable_command() {
   
   if (command_ == NULL) {
-    command_ = new ::kvraft::Op;
+    command_ = new ::kvraft::Operation;
   }
-  // @@protoc_insertion_point(field_mutable:kvraft.LogEntry.Command)
+  // @@protoc_insertion_point(field_mutable:kvraft.LogEntry.command)
   return command_;
 }
-::kvraft::Op* LogEntry::release_command() {
-  // @@protoc_insertion_point(field_release:kvraft.LogEntry.Command)
+::kvraft::Operation* LogEntry::release_command() {
+  // @@protoc_insertion_point(field_release:kvraft.LogEntry.command)
   
-  ::kvraft::Op* temp = command_;
+  ::kvraft::Operation* temp = command_;
   command_ = NULL;
   return temp;
 }
-void LogEntry::set_allocated_command(::kvraft::Op* command) {
+void LogEntry::set_allocated_command(::kvraft::Operation* command) {
   delete command_;
   command_ = command;
   if (command) {
@@ -956,21 +1818,21 @@ void LogEntry::set_allocated_command(::kvraft::Op* command) {
   } else {
     
   }
-  // @@protoc_insertion_point(field_set_allocated:kvraft.LogEntry.Command)
+  // @@protoc_insertion_point(field_set_allocated:kvraft.LogEntry.command)
 }
 
-// optional int32 Term = 2;
+// optional int32 term = 2;
 void LogEntry::clear_term() {
   term_ = 0;
 }
  ::google::protobuf::int32 LogEntry::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.LogEntry.Term)
+  // @@protoc_insertion_point(field_get:kvraft.LogEntry.term)
   return term_;
 }
  void LogEntry::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.LogEntry.Term)
+  // @@protoc_insertion_point(field_set:kvraft.LogEntry.term)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -979,9 +1841,9 @@ void LogEntry::clear_term() {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int RequestVoteArgs::kTermFieldNumber;
-const int RequestVoteArgs::kCandidateIdFieldNumber;
-const int RequestVoteArgs::kLastLogIndexFieldNumber;
-const int RequestVoteArgs::kLastLogTermFieldNumber;
+const int RequestVoteArgs::kCandidateidFieldNumber;
+const int RequestVoteArgs::kLastLogindexFieldNumber;
+const int RequestVoteArgs::kLastLogtermFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 RequestVoteArgs::RequestVoteArgs()
@@ -1081,7 +1943,7 @@ bool RequestVoteArgs::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 Term = 1;
+      // optional int32 term = 1;
       case 1: {
         if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -1091,14 +1953,14 @@ bool RequestVoteArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_CandidateId;
+        if (input->ExpectTag(16)) goto parse_candidateid;
         break;
       }
 
-      // optional int32 CandidateId = 2;
+      // optional int32 candidateid = 2;
       case 2: {
         if (tag == 16) {
-         parse_CandidateId:
+         parse_candidateid:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &candidateid_)));
@@ -1106,14 +1968,14 @@ bool RequestVoteArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_LastLogIndex;
+        if (input->ExpectTag(24)) goto parse_lastLogindex;
         break;
       }
 
-      // optional int32 LastLogIndex = 3;
+      // optional int32 lastLogindex = 3;
       case 3: {
         if (tag == 24) {
-         parse_LastLogIndex:
+         parse_lastLogindex:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &lastlogindex_)));
@@ -1121,14 +1983,14 @@ bool RequestVoteArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(32)) goto parse_LastLogTerm;
+        if (input->ExpectTag(32)) goto parse_lastLogterm;
         break;
       }
 
-      // optional int32 LastLogTerm = 4;
+      // optional int32 lastLogterm = 4;
       case 4: {
         if (tag == 32) {
-         parse_LastLogTerm:
+         parse_lastLogterm:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &lastlogterm_)));
@@ -1164,22 +2026,22 @@ failure:
 void RequestVoteArgs::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:kvraft.RequestVoteArgs)
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->term(), output);
   }
 
-  // optional int32 CandidateId = 2;
+  // optional int32 candidateid = 2;
   if (this->candidateid() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->candidateid(), output);
   }
 
-  // optional int32 LastLogIndex = 3;
+  // optional int32 lastLogindex = 3;
   if (this->lastlogindex() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->lastlogindex(), output);
   }
 
-  // optional int32 LastLogTerm = 4;
+  // optional int32 lastLogterm = 4;
   if (this->lastlogterm() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->lastlogterm(), output);
   }
@@ -1190,22 +2052,22 @@ void RequestVoteArgs::SerializeWithCachedSizes(
 ::google::protobuf::uint8* RequestVoteArgs::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:kvraft.RequestVoteArgs)
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->term(), target);
   }
 
-  // optional int32 CandidateId = 2;
+  // optional int32 candidateid = 2;
   if (this->candidateid() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->candidateid(), target);
   }
 
-  // optional int32 LastLogIndex = 3;
+  // optional int32 lastLogindex = 3;
   if (this->lastlogindex() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->lastlogindex(), target);
   }
 
-  // optional int32 LastLogTerm = 4;
+  // optional int32 lastLogterm = 4;
   if (this->lastlogterm() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->lastlogterm(), target);
   }
@@ -1218,28 +2080,28 @@ int RequestVoteArgs::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:kvraft.RequestVoteArgs)
   int total_size = 0;
 
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->term());
   }
 
-  // optional int32 CandidateId = 2;
+  // optional int32 candidateid = 2;
   if (this->candidateid() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->candidateid());
   }
 
-  // optional int32 LastLogIndex = 3;
+  // optional int32 lastLogindex = 3;
   if (this->lastlogindex() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->lastlogindex());
   }
 
-  // optional int32 LastLogTerm = 4;
+  // optional int32 lastLogterm = 4;
   if (this->lastlogterm() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -1331,60 +2193,60 @@ void RequestVoteArgs::InternalSwap(RequestVoteArgs* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // RequestVoteArgs
 
-// optional int32 Term = 1;
+// optional int32 term = 1;
 void RequestVoteArgs::clear_term() {
   term_ = 0;
 }
  ::google::protobuf::int32 RequestVoteArgs::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.Term)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.term)
   return term_;
 }
  void RequestVoteArgs::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.Term)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.term)
 }
 
-// optional int32 CandidateId = 2;
+// optional int32 candidateid = 2;
 void RequestVoteArgs::clear_candidateid() {
   candidateid_ = 0;
 }
  ::google::protobuf::int32 RequestVoteArgs::candidateid() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.CandidateId)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.candidateid)
   return candidateid_;
 }
  void RequestVoteArgs::set_candidateid(::google::protobuf::int32 value) {
   
   candidateid_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.CandidateId)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.candidateid)
 }
 
-// optional int32 LastLogIndex = 3;
+// optional int32 lastLogindex = 3;
 void RequestVoteArgs::clear_lastlogindex() {
   lastlogindex_ = 0;
 }
  ::google::protobuf::int32 RequestVoteArgs::lastlogindex() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.LastLogIndex)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastLogindex)
   return lastlogindex_;
 }
  void RequestVoteArgs::set_lastlogindex(::google::protobuf::int32 value) {
   
   lastlogindex_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.LastLogIndex)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastLogindex)
 }
 
-// optional int32 LastLogTerm = 4;
+// optional int32 lastLogterm = 4;
 void RequestVoteArgs::clear_lastlogterm() {
   lastlogterm_ = 0;
 }
  ::google::protobuf::int32 RequestVoteArgs::lastlogterm() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.LastLogTerm)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastLogterm)
   return lastlogterm_;
 }
  void RequestVoteArgs::set_lastlogterm(::google::protobuf::int32 value) {
   
   lastlogterm_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.LastLogTerm)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastLogterm)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -1393,7 +2255,7 @@ void RequestVoteArgs::clear_lastlogterm() {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int RequestVoteReply::kTermFieldNumber;
-const int RequestVoteReply::kVoteGrantedFieldNumber;
+const int RequestVoteReply::kVotegrantedFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 RequestVoteReply::RequestVoteReply()
@@ -1491,7 +2353,7 @@ bool RequestVoteReply::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 Term = 1;
+      // optional int32 term = 1;
       case 1: {
         if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -1501,14 +2363,14 @@ bool RequestVoteReply::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_VoteGranted;
+        if (input->ExpectTag(16)) goto parse_votegranted;
         break;
       }
 
-      // optional bool VoteGranted = 2;
+      // optional bool votegranted = 2;
       case 2: {
         if (tag == 16) {
-         parse_VoteGranted:
+         parse_votegranted:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &votegranted_)));
@@ -1544,12 +2406,12 @@ failure:
 void RequestVoteReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:kvraft.RequestVoteReply)
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->term(), output);
   }
 
-  // optional bool VoteGranted = 2;
+  // optional bool votegranted = 2;
   if (this->votegranted() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->votegranted(), output);
   }
@@ -1560,12 +2422,12 @@ void RequestVoteReply::SerializeWithCachedSizes(
 ::google::protobuf::uint8* RequestVoteReply::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:kvraft.RequestVoteReply)
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->term(), target);
   }
 
-  // optional bool VoteGranted = 2;
+  // optional bool votegranted = 2;
   if (this->votegranted() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->votegranted(), target);
   }
@@ -1578,14 +2440,14 @@ int RequestVoteReply::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:kvraft.RequestVoteReply)
   int total_size = 0;
 
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->term());
   }
 
-  // optional bool VoteGranted = 2;
+  // optional bool votegranted = 2;
   if (this->votegranted() != 0) {
     total_size += 1 + 1;
   }
@@ -1667,32 +2529,32 @@ void RequestVoteReply::InternalSwap(RequestVoteReply* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // RequestVoteReply
 
-// optional int32 Term = 1;
+// optional int32 term = 1;
 void RequestVoteReply::clear_term() {
   term_ = 0;
 }
  ::google::protobuf::int32 RequestVoteReply::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteReply.Term)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteReply.term)
   return term_;
 }
  void RequestVoteReply::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteReply.Term)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteReply.term)
 }
 
-// optional bool VoteGranted = 2;
+// optional bool votegranted = 2;
 void RequestVoteReply::clear_votegranted() {
   votegranted_ = false;
 }
  bool RequestVoteReply::votegranted() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteReply.VoteGranted)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteReply.votegranted)
   return votegranted_;
 }
  void RequestVoteReply::set_votegranted(bool value) {
   
   votegranted_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteReply.VoteGranted)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteReply.votegranted)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -1702,9 +2564,9 @@ void RequestVoteReply::clear_votegranted() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int AppendEntriesArgs::kTermFieldNumber;
 const int AppendEntriesArgs::kLeaderIdFieldNumber;
-const int AppendEntriesArgs::kPrevLogIndexFieldNumber;
-const int AppendEntriesArgs::kPrevLogTermFieldNumber;
-const int AppendEntriesArgs::kLeaderCommitFieldNumber;
+const int AppendEntriesArgs::kPrevlogindexFieldNumber;
+const int AppendEntriesArgs::kPrevlogtermFieldNumber;
+const int AppendEntriesArgs::kLeadercommitFieldNumber;
 const int AppendEntriesArgs::kEntriesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -1808,7 +2670,7 @@ bool AppendEntriesArgs::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 Term = 1;
+      // optional int32 term = 1;
       case 1: {
         if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -1818,14 +2680,14 @@ bool AppendEntriesArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_LeaderId;
+        if (input->ExpectTag(16)) goto parse_leaderId;
         break;
       }
 
-      // optional int32 LeaderId = 2;
+      // optional int32 leaderId = 2;
       case 2: {
         if (tag == 16) {
-         parse_LeaderId:
+         parse_leaderId:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &leaderid_)));
@@ -1833,14 +2695,14 @@ bool AppendEntriesArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_PrevLogIndex;
+        if (input->ExpectTag(24)) goto parse_prevlogindex;
         break;
       }
 
-      // optional int32 PrevLogIndex = 3;
+      // optional int32 prevlogindex = 3;
       case 3: {
         if (tag == 24) {
-         parse_PrevLogIndex:
+         parse_prevlogindex:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &prevlogindex_)));
@@ -1848,14 +2710,14 @@ bool AppendEntriesArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(32)) goto parse_PrevLogTerm;
+        if (input->ExpectTag(32)) goto parse_prevlogterm;
         break;
       }
 
-      // optional int32 PrevLogTerm = 4;
+      // optional int32 prevlogterm = 4;
       case 4: {
         if (tag == 32) {
-         parse_PrevLogTerm:
+         parse_prevlogterm:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &prevlogterm_)));
@@ -1863,14 +2725,14 @@ bool AppendEntriesArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(40)) goto parse_LeaderCommit;
+        if (input->ExpectTag(40)) goto parse_leadercommit;
         break;
       }
 
-      // optional int32 LeaderCommit = 5;
+      // optional int32 leadercommit = 5;
       case 5: {
         if (tag == 40) {
-         parse_LeaderCommit:
+         parse_leadercommit:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &leadercommit_)));
@@ -1878,22 +2740,22 @@ bool AppendEntriesArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(50)) goto parse_Entries;
+        if (input->ExpectTag(50)) goto parse_entries;
         break;
       }
 
-      // repeated .kvraft.LogEntry Entries = 6;
+      // repeated .kvraft.LogEntry entries = 6;
       case 6: {
         if (tag == 50) {
-         parse_Entries:
+         parse_entries:
           DO_(input->IncrementRecursionDepth());
-         parse_loop_Entries:
+         parse_loop_entries:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
                 input, add_entries()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(50)) goto parse_loop_Entries;
+        if (input->ExpectTag(50)) goto parse_loop_entries;
         input->UnsafeDecrementRecursionDepth();
         if (input->ExpectAtEnd()) goto success;
         break;
@@ -1923,32 +2785,32 @@ failure:
 void AppendEntriesArgs::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:kvraft.AppendEntriesArgs)
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->term(), output);
   }
 
-  // optional int32 LeaderId = 2;
+  // optional int32 leaderId = 2;
   if (this->leaderid() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->leaderid(), output);
   }
 
-  // optional int32 PrevLogIndex = 3;
+  // optional int32 prevlogindex = 3;
   if (this->prevlogindex() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->prevlogindex(), output);
   }
 
-  // optional int32 PrevLogTerm = 4;
+  // optional int32 prevlogterm = 4;
   if (this->prevlogterm() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->prevlogterm(), output);
   }
 
-  // optional int32 LeaderCommit = 5;
+  // optional int32 leadercommit = 5;
   if (this->leadercommit() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->leadercommit(), output);
   }
 
-  // repeated .kvraft.LogEntry Entries = 6;
+  // repeated .kvraft.LogEntry entries = 6;
   for (unsigned int i = 0, n = this->entries_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, this->entries(i), output);
@@ -1960,32 +2822,32 @@ void AppendEntriesArgs::SerializeWithCachedSizes(
 ::google::protobuf::uint8* AppendEntriesArgs::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:kvraft.AppendEntriesArgs)
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->term(), target);
   }
 
-  // optional int32 LeaderId = 2;
+  // optional int32 leaderId = 2;
   if (this->leaderid() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->leaderid(), target);
   }
 
-  // optional int32 PrevLogIndex = 3;
+  // optional int32 prevlogindex = 3;
   if (this->prevlogindex() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->prevlogindex(), target);
   }
 
-  // optional int32 PrevLogTerm = 4;
+  // optional int32 prevlogterm = 4;
   if (this->prevlogterm() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->prevlogterm(), target);
   }
 
-  // optional int32 LeaderCommit = 5;
+  // optional int32 leadercommit = 5;
   if (this->leadercommit() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->leadercommit(), target);
   }
 
-  // repeated .kvraft.LogEntry Entries = 6;
+  // repeated .kvraft.LogEntry entries = 6;
   for (unsigned int i = 0, n = this->entries_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
@@ -2000,42 +2862,42 @@ int AppendEntriesArgs::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:kvraft.AppendEntriesArgs)
   int total_size = 0;
 
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->term());
   }
 
-  // optional int32 LeaderId = 2;
+  // optional int32 leaderId = 2;
   if (this->leaderid() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->leaderid());
   }
 
-  // optional int32 PrevLogIndex = 3;
+  // optional int32 prevlogindex = 3;
   if (this->prevlogindex() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->prevlogindex());
   }
 
-  // optional int32 PrevLogTerm = 4;
+  // optional int32 prevlogterm = 4;
   if (this->prevlogterm() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->prevlogterm());
   }
 
-  // optional int32 LeaderCommit = 5;
+  // optional int32 leadercommit = 5;
   if (this->leadercommit() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->leadercommit());
   }
 
-  // repeated .kvraft.LogEntry Entries = 6;
+  // repeated .kvraft.LogEntry entries = 6;
   total_size += 1 * this->entries_size();
   for (int i = 0; i < this->entries_size(); i++) {
     total_size +=
@@ -2134,77 +2996,77 @@ void AppendEntriesArgs::InternalSwap(AppendEntriesArgs* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // AppendEntriesArgs
 
-// optional int32 Term = 1;
+// optional int32 term = 1;
 void AppendEntriesArgs::clear_term() {
   term_ = 0;
 }
  ::google::protobuf::int32 AppendEntriesArgs::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.Term)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.term)
   return term_;
 }
  void AppendEntriesArgs::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.Term)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.term)
 }
 
-// optional int32 LeaderId = 2;
+// optional int32 leaderId = 2;
 void AppendEntriesArgs::clear_leaderid() {
   leaderid_ = 0;
 }
  ::google::protobuf::int32 AppendEntriesArgs::leaderid() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.LeaderId)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.leaderId)
   return leaderid_;
 }
  void AppendEntriesArgs::set_leaderid(::google::protobuf::int32 value) {
   
   leaderid_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.LeaderId)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.leaderId)
 }
 
-// optional int32 PrevLogIndex = 3;
+// optional int32 prevlogindex = 3;
 void AppendEntriesArgs::clear_prevlogindex() {
   prevlogindex_ = 0;
 }
  ::google::protobuf::int32 AppendEntriesArgs::prevlogindex() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.PrevLogIndex)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.prevlogindex)
   return prevlogindex_;
 }
  void AppendEntriesArgs::set_prevlogindex(::google::protobuf::int32 value) {
   
   prevlogindex_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.PrevLogIndex)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.prevlogindex)
 }
 
-// optional int32 PrevLogTerm = 4;
+// optional int32 prevlogterm = 4;
 void AppendEntriesArgs::clear_prevlogterm() {
   prevlogterm_ = 0;
 }
  ::google::protobuf::int32 AppendEntriesArgs::prevlogterm() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.PrevLogTerm)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.prevlogterm)
   return prevlogterm_;
 }
  void AppendEntriesArgs::set_prevlogterm(::google::protobuf::int32 value) {
   
   prevlogterm_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.PrevLogTerm)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.prevlogterm)
 }
 
-// optional int32 LeaderCommit = 5;
+// optional int32 leadercommit = 5;
 void AppendEntriesArgs::clear_leadercommit() {
   leadercommit_ = 0;
 }
  ::google::protobuf::int32 AppendEntriesArgs::leadercommit() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.LeaderCommit)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.leadercommit)
   return leadercommit_;
 }
  void AppendEntriesArgs::set_leadercommit(::google::protobuf::int32 value) {
   
   leadercommit_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.LeaderCommit)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.leadercommit)
 }
 
-// repeated .kvraft.LogEntry Entries = 6;
+// repeated .kvraft.LogEntry entries = 6;
 int AppendEntriesArgs::entries_size() const {
   return entries_.size();
 }
@@ -2212,25 +3074,25 @@ void AppendEntriesArgs::clear_entries() {
   entries_.Clear();
 }
 const ::kvraft::LogEntry& AppendEntriesArgs::entries(int index) const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.entries)
   return entries_.Get(index);
 }
 ::kvraft::LogEntry* AppendEntriesArgs::mutable_entries(int index) {
-  // @@protoc_insertion_point(field_mutable:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_mutable:kvraft.AppendEntriesArgs.entries)
   return entries_.Mutable(index);
 }
 ::kvraft::LogEntry* AppendEntriesArgs::add_entries() {
-  // @@protoc_insertion_point(field_add:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_add:kvraft.AppendEntriesArgs.entries)
   return entries_.Add();
 }
 ::google::protobuf::RepeatedPtrField< ::kvraft::LogEntry >*
 AppendEntriesArgs::mutable_entries() {
-  // @@protoc_insertion_point(field_mutable_list:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_mutable_list:kvraft.AppendEntriesArgs.entries)
   return &entries_;
 }
 const ::google::protobuf::RepeatedPtrField< ::kvraft::LogEntry >&
 AppendEntriesArgs::entries() const {
-  // @@protoc_insertion_point(field_list:kvraft.AppendEntriesArgs.Entries)
+  // @@protoc_insertion_point(field_list:kvraft.AppendEntriesArgs.entries)
   return entries_;
 }
 
@@ -2241,7 +3103,7 @@ AppendEntriesArgs::entries() const {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int AppendEntriesReply::kTermFieldNumber;
 const int AppendEntriesReply::kSuccessFieldNumber;
-const int AppendEntriesReply::kReplicatedIndexFieldNumber;
+const int AppendEntriesReply::kReplicatedindexFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 AppendEntriesReply::AppendEntriesReply()
@@ -2340,7 +3202,7 @@ bool AppendEntriesReply::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 Term = 1;
+      // optional int32 term = 1;
       case 1: {
         if (tag == 8) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -2350,14 +3212,14 @@ bool AppendEntriesReply::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_Success;
+        if (input->ExpectTag(16)) goto parse_success;
         break;
       }
 
-      // optional bool Success = 2;
+      // optional bool success = 2;
       case 2: {
         if (tag == 16) {
-         parse_Success:
+         parse_success:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &success_)));
@@ -2365,14 +3227,14 @@ bool AppendEntriesReply::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_ReplicatedIndex;
+        if (input->ExpectTag(24)) goto parse_replicatedindex;
         break;
       }
 
-      // optional int32 ReplicatedIndex = 3;
+      // optional int32 replicatedindex = 3;
       case 3: {
         if (tag == 24) {
-         parse_ReplicatedIndex:
+         parse_replicatedindex:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &replicatedindex_)));
@@ -2408,17 +3270,17 @@ failure:
 void AppendEntriesReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:kvraft.AppendEntriesReply)
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->term(), output);
   }
 
-  // optional bool Success = 2;
+  // optional bool success = 2;
   if (this->success() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->success(), output);
   }
 
-  // optional int32 ReplicatedIndex = 3;
+  // optional int32 replicatedindex = 3;
   if (this->replicatedindex() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->replicatedindex(), output);
   }
@@ -2429,17 +3291,17 @@ void AppendEntriesReply::SerializeWithCachedSizes(
 ::google::protobuf::uint8* AppendEntriesReply::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:kvraft.AppendEntriesReply)
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->term(), target);
   }
 
-  // optional bool Success = 2;
+  // optional bool success = 2;
   if (this->success() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->success(), target);
   }
 
-  // optional int32 ReplicatedIndex = 3;
+  // optional int32 replicatedindex = 3;
   if (this->replicatedindex() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->replicatedindex(), target);
   }
@@ -2452,19 +3314,19 @@ int AppendEntriesReply::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:kvraft.AppendEntriesReply)
   int total_size = 0;
 
-  // optional int32 Term = 1;
+  // optional int32 term = 1;
   if (this->term() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->term());
   }
 
-  // optional bool Success = 2;
+  // optional bool success = 2;
   if (this->success() != 0) {
     total_size += 1 + 1;
   }
 
-  // optional int32 ReplicatedIndex = 3;
+  // optional int32 replicatedindex = 3;
   if (this->replicatedindex() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -2552,46 +3414,46 @@ void AppendEntriesReply::InternalSwap(AppendEntriesReply* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // AppendEntriesReply
 
-// optional int32 Term = 1;
+// optional int32 term = 1;
 void AppendEntriesReply::clear_term() {
   term_ = 0;
 }
  ::google::protobuf::int32 AppendEntriesReply::term() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.Term)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.term)
   return term_;
 }
  void AppendEntriesReply::set_term(::google::protobuf::int32 value) {
   
   term_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.Term)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.term)
 }
 
-// optional bool Success = 2;
+// optional bool success = 2;
 void AppendEntriesReply::clear_success() {
   success_ = false;
 }
  bool AppendEntriesReply::success() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.Success)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.success)
   return success_;
 }
  void AppendEntriesReply::set_success(bool value) {
   
   success_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.Success)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.success)
 }
 
-// optional int32 ReplicatedIndex = 3;
+// optional int32 replicatedindex = 3;
 void AppendEntriesReply::clear_replicatedindex() {
   replicatedindex_ = 0;
 }
  ::google::protobuf::int32 AppendEntriesReply::replicatedindex() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.ReplicatedIndex)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesReply.replicatedindex)
   return replicatedindex_;
 }
  void AppendEntriesReply::set_replicatedindex(::google::protobuf::int32 value) {
   
   replicatedindex_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.ReplicatedIndex)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesReply.replicatedindex)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

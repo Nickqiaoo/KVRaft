@@ -36,3 +36,7 @@ int KVRaftServiceImpl::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraf
     return -1;
 }
 
+int KVRaftServiceImpl::Command(const kvraft::KVArgs &req, kvraft::KVReply *resp) {
+    return -1;
+}
+

@@ -26,6 +26,7 @@ class KVRaftTool {
     virtual int PHXEcho(phxrpc::OptMap &bigmap);
     virtual int RequestVote(phxrpc::OptMap &bigmap);
     virtual int AppendEntries(phxrpc::OptMap &bigmap);
+    virtual int Command(phxrpc::OptMap &bigmap);
 
     typedef int (KVRaftTool::*ToolFunc_t)(phxrpc::OptMap &);
 

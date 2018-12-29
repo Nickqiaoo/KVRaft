@@ -28,6 +28,7 @@ class KVRaftServiceImpl : public KVRaftService {
     virtual int PHXEcho(const google::protobuf::StringValue &req, google::protobuf::StringValue *resp) override;
     virtual int RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp) override;
     virtual int AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp) override;
+    virtual int Command(const kvraft::KVArgs &req, kvraft::KVReply *resp) override;
 
   private:
     ServiceArgs_t &args_;
