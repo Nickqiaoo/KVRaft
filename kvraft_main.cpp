@@ -85,7 +85,6 @@ int main(int argc, char **argv) {
 
     phxrpc::HshaServer server(config.GetHshaServerConfig(), Dispatch, &service_args);
     server.RunForever();
-
     phxrpc::closelog();
 
     return 0;
