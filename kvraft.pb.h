@@ -585,15 +585,15 @@ class RequestVoteArgs : public ::google::protobuf::Message /* @@protoc_insertion
   ::google::protobuf::int32 candidateid() const;
   void set_candidateid(::google::protobuf::int32 value);
 
-  // optional int32 lastLogindex = 3;
+  // optional int32 lastlogindex = 3;
   void clear_lastlogindex();
-  static const int kLastLogindexFieldNumber = 3;
+  static const int kLastlogindexFieldNumber = 3;
   ::google::protobuf::int32 lastlogindex() const;
   void set_lastlogindex(::google::protobuf::int32 value);
 
-  // optional int32 lastLogterm = 4;
+  // optional int32 lastlogterm = 4;
   void clear_lastlogterm();
-  static const int kLastLogtermFieldNumber = 4;
+  static const int kLastlogtermFieldNumber = 4;
   ::google::protobuf::int32 lastlogterm() const;
   void set_lastlogterm(::google::protobuf::int32 value);
 
@@ -771,9 +771,9 @@ class AppendEntriesArgs : public ::google::protobuf::Message /* @@protoc_inserti
   ::google::protobuf::int32 term() const;
   void set_term(::google::protobuf::int32 value);
 
-  // optional int32 leaderId = 2;
+  // optional int32 leaderid = 2;
   void clear_leaderid();
-  static const int kLeaderIdFieldNumber = 2;
+  static const int kLeaderidFieldNumber = 2;
   ::google::protobuf::int32 leaderid() const;
   void set_leaderid(::google::protobuf::int32 value);
 
@@ -1252,32 +1252,32 @@ inline void RequestVoteArgs::set_candidateid(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.candidateid)
 }
 
-// optional int32 lastLogindex = 3;
+// optional int32 lastlogindex = 3;
 inline void RequestVoteArgs::clear_lastlogindex() {
   lastlogindex_ = 0;
 }
 inline ::google::protobuf::int32 RequestVoteArgs::lastlogindex() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastLogindex)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastlogindex)
   return lastlogindex_;
 }
 inline void RequestVoteArgs::set_lastlogindex(::google::protobuf::int32 value) {
   
   lastlogindex_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastLogindex)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastlogindex)
 }
 
-// optional int32 lastLogterm = 4;
+// optional int32 lastlogterm = 4;
 inline void RequestVoteArgs::clear_lastlogterm() {
   lastlogterm_ = 0;
 }
 inline ::google::protobuf::int32 RequestVoteArgs::lastlogterm() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastLogterm)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastlogterm)
   return lastlogterm_;
 }
 inline void RequestVoteArgs::set_lastlogterm(::google::protobuf::int32 value) {
   
   lastlogterm_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastLogterm)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastlogterm)
 }
 
 // -------------------------------------------------------------------
@@ -1330,18 +1330,18 @@ inline void AppendEntriesArgs::set_term(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.term)
 }
 
-// optional int32 leaderId = 2;
+// optional int32 leaderid = 2;
 inline void AppendEntriesArgs::clear_leaderid() {
   leaderid_ = 0;
 }
 inline ::google::protobuf::int32 AppendEntriesArgs::leaderid() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.leaderId)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.leaderid)
   return leaderid_;
 }
 inline void AppendEntriesArgs::set_leaderid(::google::protobuf::int32 value) {
   
   leaderid_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.leaderId)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.leaderid)
 }
 
 // optional int32 prevlogindex = 3;

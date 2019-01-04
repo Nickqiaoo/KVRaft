@@ -16,7 +16,12 @@ SVR_OBJS = kvraft.pb.o \
 		phxrpc_kvraft_service.o \
 		phxrpc_kvraft_dispatcher.o \
 		kvraft_server_config.o \
-		kvraft_main.o
+		kvraft_main.o \
+		kvraft_client_uthread.o \
+		phxrpc_kvraft_stub.o \
+		raft.o \
+        kvserver.o
+
 
 CLI_OBJS = kvraft.pb.o \
 		kvraft_client.o \
@@ -35,6 +40,11 @@ libkvraft_client.a: $(CLI_OBJS)
 
 kvraft_tool_main: phxrpc_kvraft_tool.o kvraft_tool_impl.o kvraft_tool_main.o
 	$(LINKER) $^ -L. -lkvraft_client $(LDFLAGS) -o $@
+
+########## kvraft ##########
+
+raft.o: raft.h kvraft_client_uthread.h
+kvserver.o: kvserver.h
 
 ########## message ##########
 

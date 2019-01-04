@@ -7,12 +7,11 @@
 #pragma once
 
 #include "kvraft.pb.h"
-#include "phxrpc/rpc.h"
 #include "phxrpc/network.h"
-
+#include "phxrpc/rpc.h"
 
 class KVRaftClientUThread {
-  public:
+   public:
     static bool Init(const char *config_file);
 
     static const char *GetPackageName();
@@ -22,11 +21,10 @@ class KVRaftClientUThread {
 
     int PHXEcho(const google::protobuf::StringValue &req, google::protobuf::StringValue *resp);
     int PHXBatchEcho(const google::protobuf::StringValue &req, google::protobuf::StringValue *resp);
-    int RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp);
+    int RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp, int index);
     int AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp);
     int Command(const kvraft::KVArgs &req, kvraft::KVReply *resp);
 
-  private:
+   private:
     phxrpc::UThreadEpollScheduler *uthread_scheduler_;
 };
-

@@ -100,9 +100,9 @@ int KVRaftClientUThread::PHXBatchEcho(const google::protobuf::StringValue &req, 
     return ret;
 }
 
-int KVRaftClientUThread::RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp)
+int KVRaftClientUThread::RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp,int index)
 {
-    const phxrpc::Endpoint_t *ep{global_kvraftclientuthread_config_.GetRandom()};
+    const phxrpc::Endpoint_t *ep{global_kvraftclientuthread_config_.GetByIndex(index)};
 
     if (uthread_scheduler_ && ep) {
         phxrpc::UThreadTcpStream socket;

@@ -1,15 +1,19 @@
 #pragma once
 
-#include "kvraft_client_uthread.h"
+#include "kvraft.pb.h"
+#include "phxrpc/network.h"
 
 #include <mutex>
 #include <string>
 #include <vector>
+#include <thread>
 
 using std::string;
 using std::vector;
 
-namespace kvraft {
+namespace raftkv {
+
+using namespace phxrpc;
 
 enum NodeState { Follower, Candidate, Leader };
 
@@ -17,30 +21,34 @@ struct LogEntry {
     enum op { GET, PUT, DEL };
     string key;
     string value;
+    int term;
 };
 
 class Raft {
    public:
-   Raft(phxrpc::UThreadEpollScheduler *const scheduler);
-   ~Raft();
+    Raft(int me);
+    ~Raft();
     std::pair<int, bool> GetState();
     int AppendEntries(const kvraft::AppendEntriesArgs &req,
                       kvraft::AppendEntriesReply *resp);
 
     int RequestVote(const kvraft::RequestVoteArgs &req,
                     kvraft::RequestVoteReply *resp);
+    void SendRequestVotesToAll(const kvraft::RequestVoteArgs &req);
     int SendAppendEntries(int server, const kvraft::RequestVoteArgs &req,
                           kvraft::RequestVoteReply *resp);
-    int SendAppendEntriesToAll();
-    int HandleAppendEntries(int server, kvraft::RequestVoteReply *resp);
-    int HandleRequestVote(kvraft::RequestVoteReply *resp);
+    void SendAppendEntriesToAll();
+    int HandleAppendEntries(int server, const kvraft::RequestVoteReply &resp);
+    void HandleRequestVote(const kvraft::RequestVoteReply &resp);
     void CommitLog();
     bool Start(kvraft::Operation);
-    void HandleTimeout();
+    void HandleTimeout(UThreadSocket_t *socket);
     void ResetTimer();
-    void CreateTimer();
+    void RunTimer();
+
    private:
     std::mutex raft_mutex_;
+    int me_;
     int current_term_{0};
     int voted_for_{-1};
     vector<LogEntry> log_;
@@ -53,9 +61,9 @@ class Raft {
 
     NodeState state_{Follower};
     int sum_of_vote_{0};
-    phxrpc::UThreadEpollScheduler *scheduler_{nullptr};
     int timer_fd_;
     std::thread thread_;
+    UThreadEpollScheduler scheduler_;
 };
 
-}  // namespace kvraft
+}  // namespace raftkv

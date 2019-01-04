@@ -39,8 +39,8 @@ message LogEntry{
 message RequestVoteArgs{
     int32 term = 1;
     int32 candidateid = 2;
-    int32 lastLogindex = 3;
-    int32 lastLogterm = 4; 
+    int32 lastlogindex = 3;
+    int32 lastlogterm = 4; 
 }
 
 message RequestVoteReply{
@@ -50,7 +50,7 @@ message RequestVoteReply{
 
 message AppendEntriesArgs{
     int32 term = 1;
-    int32 leaderId = 2;
+    int32 leaderid = 2;
     int32 prevlogindex = 3;
     int32 prevlogterm = 4;
     int32 leadercommit = 5;

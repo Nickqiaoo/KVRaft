@@ -5,10 +5,12 @@
 
 #include <mutex>
 
-namespace kvraft {
+namespace raftkv {
 
-class KVServer {
+class KvServer {
    public:
+    KvServer(int me);
+    ~KvServer();
     int AppendEntries(const kvraft::AppendEntriesArgs &req,
                       kvraft::AppendEntriesReply *resp);
 
@@ -18,8 +20,8 @@ class KVServer {
     int Command(const kvraft::KVArgs &req, kvraft::KVReply *resp);
 
    private:
-    std::mutex kvraft_mutex_;
+    std::mutex kvserver_mutex_;
     Raft raft_;
 };
 
-}  // namespace kvraft
+}  // namespace raftkv

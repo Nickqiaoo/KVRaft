@@ -17,6 +17,7 @@
 #include "phxrpc_kvraft_dispatcher.h"
 #include "kvraft_service_impl.h"
 #include "kvraft_server_config.h"
+#include "kvserver.h"
 
 
 using namespace std;
@@ -51,11 +52,13 @@ int main(int argc, char **argv) {
     int log_level{-1};
     extern char *optarg;
     int c;
-    while (EOF != (c = getopt(argc, argv, "c:vl:d"))) {
+    int id;
+    while (EOF != (c = getopt(argc, argv, "c:vl:di:"))) {
         switch (c) {
             case 'c': config_file = optarg; break;
             case 'd': daemonize = true; break;
             case 'l': log_level = atoi(optarg); break;
+            case 'i': id = atoi(optarg); break;
 
             case 'v':
             default: ShowUsage(argv[0]); break;
@@ -84,6 +87,7 @@ int main(int argc, char **argv) {
     service_args.config = &config;
 
     phxrpc::HshaServer server(config.GetHshaServerConfig(), Dispatch, &service_args);
+    raftkv::KvServer kv_server(id);
     server.RunForever();
     phxrpc::closelog();
 

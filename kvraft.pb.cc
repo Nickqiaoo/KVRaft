@@ -268,11 +268,11 @@ void protobuf_AddDesc_kvraft_2eproto() {
     ".KVResult\022\r\n\005value\030\002 \001(\t\"<\n\010LogEntry\022\"\n\007"
     "command\030\001 \001(\0132\021.kvraft.Operation\022\014\n\004term"
     "\030\002 \001(\005\"_\n\017RequestVoteArgs\022\014\n\004term\030\001 \001(\005\022"
-    "\023\n\013candidateid\030\002 \001(\005\022\024\n\014lastLogindex\030\003 \001"
-    "(\005\022\023\n\013lastLogterm\030\004 \001(\005\"5\n\020RequestVoteRe"
+    "\023\n\013candidateid\030\002 \001(\005\022\024\n\014lastlogindex\030\003 \001"
+    "(\005\022\023\n\013lastlogterm\030\004 \001(\005\"5\n\020RequestVoteRe"
     "ply\022\014\n\004term\030\001 \001(\005\022\023\n\013votegranted\030\002 \001(\010\"\227"
     "\001\n\021AppendEntriesArgs\022\014\n\004term\030\001 \001(\005\022\020\n\010le"
-    "aderId\030\002 \001(\005\022\024\n\014prevlogindex\030\003 \001(\005\022\023\n\013pr"
+    "aderid\030\002 \001(\005\022\024\n\014prevlogindex\030\003 \001(\005\022\023\n\013pr"
     "evlogterm\030\004 \001(\005\022\024\n\014leadercommit\030\005 \001(\005\022!\n"
     "\007entries\030\006 \003(\0132\020.kvraft.LogEntry\"L\n\022Appe"
     "ndEntriesReply\022\014\n\004term\030\001 \001(\005\022\017\n\007success\030"
@@ -1842,8 +1842,8 @@ void LogEntry::clear_term() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int RequestVoteArgs::kTermFieldNumber;
 const int RequestVoteArgs::kCandidateidFieldNumber;
-const int RequestVoteArgs::kLastLogindexFieldNumber;
-const int RequestVoteArgs::kLastLogtermFieldNumber;
+const int RequestVoteArgs::kLastlogindexFieldNumber;
+const int RequestVoteArgs::kLastlogtermFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 RequestVoteArgs::RequestVoteArgs()
@@ -1968,14 +1968,14 @@ bool RequestVoteArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_lastLogindex;
+        if (input->ExpectTag(24)) goto parse_lastlogindex;
         break;
       }
 
-      // optional int32 lastLogindex = 3;
+      // optional int32 lastlogindex = 3;
       case 3: {
         if (tag == 24) {
-         parse_lastLogindex:
+         parse_lastlogindex:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &lastlogindex_)));
@@ -1983,14 +1983,14 @@ bool RequestVoteArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(32)) goto parse_lastLogterm;
+        if (input->ExpectTag(32)) goto parse_lastlogterm;
         break;
       }
 
-      // optional int32 lastLogterm = 4;
+      // optional int32 lastlogterm = 4;
       case 4: {
         if (tag == 32) {
-         parse_lastLogterm:
+         parse_lastlogterm:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &lastlogterm_)));
@@ -2036,12 +2036,12 @@ void RequestVoteArgs::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->candidateid(), output);
   }
 
-  // optional int32 lastLogindex = 3;
+  // optional int32 lastlogindex = 3;
   if (this->lastlogindex() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->lastlogindex(), output);
   }
 
-  // optional int32 lastLogterm = 4;
+  // optional int32 lastlogterm = 4;
   if (this->lastlogterm() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->lastlogterm(), output);
   }
@@ -2062,12 +2062,12 @@ void RequestVoteArgs::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->candidateid(), target);
   }
 
-  // optional int32 lastLogindex = 3;
+  // optional int32 lastlogindex = 3;
   if (this->lastlogindex() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->lastlogindex(), target);
   }
 
-  // optional int32 lastLogterm = 4;
+  // optional int32 lastlogterm = 4;
   if (this->lastlogterm() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->lastlogterm(), target);
   }
@@ -2094,14 +2094,14 @@ int RequestVoteArgs::ByteSize() const {
         this->candidateid());
   }
 
-  // optional int32 lastLogindex = 3;
+  // optional int32 lastlogindex = 3;
   if (this->lastlogindex() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->lastlogindex());
   }
 
-  // optional int32 lastLogterm = 4;
+  // optional int32 lastlogterm = 4;
   if (this->lastlogterm() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -2221,32 +2221,32 @@ void RequestVoteArgs::clear_candidateid() {
   // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.candidateid)
 }
 
-// optional int32 lastLogindex = 3;
+// optional int32 lastlogindex = 3;
 void RequestVoteArgs::clear_lastlogindex() {
   lastlogindex_ = 0;
 }
  ::google::protobuf::int32 RequestVoteArgs::lastlogindex() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastLogindex)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastlogindex)
   return lastlogindex_;
 }
  void RequestVoteArgs::set_lastlogindex(::google::protobuf::int32 value) {
   
   lastlogindex_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastLogindex)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastlogindex)
 }
 
-// optional int32 lastLogterm = 4;
+// optional int32 lastlogterm = 4;
 void RequestVoteArgs::clear_lastlogterm() {
   lastlogterm_ = 0;
 }
  ::google::protobuf::int32 RequestVoteArgs::lastlogterm() const {
-  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastLogterm)
+  // @@protoc_insertion_point(field_get:kvraft.RequestVoteArgs.lastlogterm)
   return lastlogterm_;
 }
  void RequestVoteArgs::set_lastlogterm(::google::protobuf::int32 value) {
   
   lastlogterm_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastLogterm)
+  // @@protoc_insertion_point(field_set:kvraft.RequestVoteArgs.lastlogterm)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -2563,7 +2563,7 @@ void RequestVoteReply::clear_votegranted() {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int AppendEntriesArgs::kTermFieldNumber;
-const int AppendEntriesArgs::kLeaderIdFieldNumber;
+const int AppendEntriesArgs::kLeaderidFieldNumber;
 const int AppendEntriesArgs::kPrevlogindexFieldNumber;
 const int AppendEntriesArgs::kPrevlogtermFieldNumber;
 const int AppendEntriesArgs::kLeadercommitFieldNumber;
@@ -2680,14 +2680,14 @@ bool AppendEntriesArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_leaderId;
+        if (input->ExpectTag(16)) goto parse_leaderid;
         break;
       }
 
-      // optional int32 leaderId = 2;
+      // optional int32 leaderid = 2;
       case 2: {
         if (tag == 16) {
-         parse_leaderId:
+         parse_leaderid:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &leaderid_)));
@@ -2790,7 +2790,7 @@ void AppendEntriesArgs::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->term(), output);
   }
 
-  // optional int32 leaderId = 2;
+  // optional int32 leaderid = 2;
   if (this->leaderid() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->leaderid(), output);
   }
@@ -2827,7 +2827,7 @@ void AppendEntriesArgs::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->term(), target);
   }
 
-  // optional int32 leaderId = 2;
+  // optional int32 leaderid = 2;
   if (this->leaderid() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->leaderid(), target);
   }
@@ -2869,7 +2869,7 @@ int AppendEntriesArgs::ByteSize() const {
         this->term());
   }
 
-  // optional int32 leaderId = 2;
+  // optional int32 leaderid = 2;
   if (this->leaderid() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -3010,18 +3010,18 @@ void AppendEntriesArgs::clear_term() {
   // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.term)
 }
 
-// optional int32 leaderId = 2;
+// optional int32 leaderid = 2;
 void AppendEntriesArgs::clear_leaderid() {
   leaderid_ = 0;
 }
  ::google::protobuf::int32 AppendEntriesArgs::leaderid() const {
-  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.leaderId)
+  // @@protoc_insertion_point(field_get:kvraft.AppendEntriesArgs.leaderid)
   return leaderid_;
 }
  void AppendEntriesArgs::set_leaderid(::google::protobuf::int32 value) {
   
   leaderid_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.leaderId)
+  // @@protoc_insertion_point(field_set:kvraft.AppendEntriesArgs.leaderid)
 }
 
 // optional int32 prevlogindex = 3;
