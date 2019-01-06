@@ -9,9 +9,9 @@ namespace raftkv {
 
 class KvServer {
    public:
-    KvServer(int me);
+    KvServer(int me,int num_of_server);
     ~KvServer();
-    int AppendEntries(const kvraft::AppendEntriesArgs &req,
+    void AppendEntries(const kvraft::AppendEntriesArgs &req,
                       kvraft::AppendEntriesReply *resp);
 
     int RequestVote(const kvraft::RequestVoteArgs &req,

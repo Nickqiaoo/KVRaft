@@ -120,9 +120,9 @@ int KVRaftClientUThread::RequestVote(const kvraft::RequestVoteArgs &req, kvraft:
     return -1;
 }
 
-int KVRaftClientUThread::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp)
+int KVRaftClientUThread::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp,int index)
 {
-    const phxrpc::Endpoint_t *ep{global_kvraftclientuthread_config_.GetRandom()};
+    const phxrpc::Endpoint_t *ep{global_kvraftclientuthread_config_.GetByIndex(index)};
 
     if (uthread_scheduler_ && ep) {
         phxrpc::UThreadTcpStream socket;

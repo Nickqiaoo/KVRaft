@@ -4,9 +4,9 @@
 
 */
 
-#include <iostream>
 #include <signal.h>
 #include <unistd.h>
+#include <iostream>
 
 #include "phxrpc/comm.h"
 #include "phxrpc/file.h"
@@ -14,25 +14,22 @@
 #include "phxrpc/msg.h"
 #include "phxrpc/rpc.h"
 
-#include "phxrpc_kvraft_dispatcher.h"
-#include "kvraft_service_impl.h"
 #include "kvraft_server_config.h"
+#include "kvraft_service_impl.h"
 #include "kvserver.h"
-
+#include "phxrpc_kvraft_dispatcher.h"
 
 using namespace std;
 
-
-void Dispatch(const phxrpc::BaseRequest &req,
-              phxrpc::BaseResponse *const resp,
+void Dispatch(const phxrpc::BaseRequest &req, phxrpc::BaseResponse *const resp,
               phxrpc::DispatcherArgs_t *const args) {
     ServiceArgs_t *service_args{(ServiceArgs_t *)(args->service_args)};
 
     KVRaftServiceImpl service(*service_args, args->server_worker_uthread_scheduler);
     KVRaftDispatcher dispatcher(service, args);
 
-    phxrpc::BaseDispatcher<KVRaftDispatcher> base_dispatcher(
-            dispatcher, KVRaftDispatcher::GetURIFuncMap());
+    phxrpc::BaseDispatcher<KVRaftDispatcher> base_dispatcher(dispatcher,
+                                                             KVRaftDispatcher::GetURIFuncMap());
     if (!base_dispatcher.Dispatch(req, resp)) {
         resp->SetFake(phxrpc::BaseResponse::FakeReason::DISPATCH_ERROR);
     }
@@ -51,17 +48,28 @@ int main(int argc, char **argv) {
     bool daemonize{false};
     int log_level{-1};
     extern char *optarg;
-    int c;
-    int id;
-    while (EOF != (c = getopt(argc, argv, "c:vl:di:"))) {
+    int c, id, num_of_server;
+    while (EOF != (c = getopt(argc, argv, "c:vl:di:s:"))) {
         switch (c) {
-            case 'c': config_file = optarg; break;
-            case 'd': daemonize = true; break;
-            case 'l': log_level = atoi(optarg); break;
-            case 'i': id = atoi(optarg); break;
-
+            case 'c':
+                config_file = optarg;
+                break;
+            case 'd':
+                daemonize = true;
+                break;
+            case 'l':
+                log_level = atoi(optarg);
+                break;
+            case 'i':
+                id = atoi(optarg);
+                break;
+            case 's':
+                num_of_server = atoi(optarg);
+                break;
             case 'v':
-            default: ShowUsage(argv[0]); break;
+            default:
+                ShowUsage(argv[0]);
+                break;
         }
     }
 
@@ -70,8 +78,8 @@ int main(int argc, char **argv) {
     PHXRPC_ASSERT(signal(SIGPIPE, SIG_IGN) != SIG_ERR);
 
     // set customize log / monitor
-    //phxrpc::setlog(openlog, closelog, vlog);
-    //phxrpc::MonitorFactory::SetFactory(new YourMonitorFactory());
+    // phxrpc::setlog(openlog, closelog, vlog);
+    // phxrpc::MonitorFactory::SetFactory(new YourMonitorFactory());
 
     if (nullptr == config_file) ShowUsage(argv[0]);
 
@@ -87,10 +95,9 @@ int main(int argc, char **argv) {
     service_args.config = &config;
 
     phxrpc::HshaServer server(config.GetHshaServerConfig(), Dispatch, &service_args);
-    raftkv::KvServer kv_server(id);
+    raftkv::KvServer kv_server(id, num_of_server);
     server.RunForever();
     phxrpc::closelog();
 
     return 0;
 }
-
