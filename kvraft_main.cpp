@@ -93,9 +93,10 @@ int main(int argc, char **argv) {
 
     ServiceArgs_t service_args;
     service_args.config = &config;
-
+    
     phxrpc::HshaServer server(config.GetHshaServerConfig(), Dispatch, &service_args);
     raftkv::KvServer kv_server(id, num_of_server);
+    service_args.server = &kv_server;
     server.RunForever();
     phxrpc::closelog();
 

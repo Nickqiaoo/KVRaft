@@ -14,7 +14,7 @@ class KvServer {
     void AppendEntries(const kvraft::AppendEntriesArgs &req,
                       kvraft::AppendEntriesReply *resp);
 
-    int RequestVote(const kvraft::RequestVoteArgs &req,
+    void RequestVote(const kvraft::RequestVoteArgs &req,
                     kvraft::RequestVoteReply *resp);
     int StartCommand(kvraft::Operation &op);
     int Command(const kvraft::KVArgs &req, kvraft::KVReply *resp);

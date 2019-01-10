@@ -22,6 +22,7 @@ Raft::Raft(int me, int num_of_server)
       next_index_(num_of_server, 1),
       match_index_(num_of_server, 0),
       thread_(std::bind(&Raft::RunTimer, this)) {
+    std::lock_guard<std::mutex> lock(raft_mutex_);
     log_.emplace_back(LogEntry{});
 }
 

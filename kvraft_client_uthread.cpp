@@ -36,6 +36,7 @@ const char *KVRaftClientUThread::GetPackageName() {
 }
 
 KVRaftClientUThread::KVRaftClientUThread(phxrpc::UThreadEpollScheduler *uthread_scheduler) {
+    Init("kvraft_client.conf");
     uthread_scheduler_ = uthread_scheduler;
     static mutex monitor_mutex;
     if (!global_kvraftclientuthread_monitor_.get()) {
@@ -103,7 +104,6 @@ int KVRaftClientUThread::PHXBatchEcho(const google::protobuf::StringValue &req, 
 int KVRaftClientUThread::RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp,int index)
 {
     const phxrpc::Endpoint_t *ep{global_kvraftclientuthread_config_.GetByIndex(index)};
-
     if (uthread_scheduler_ && ep) {
         phxrpc::UThreadTcpStream socket;
         bool open_ret{phxrpc::PhxrpcTcpUtils::Open(uthread_scheduler_, &socket, ep->ip, ep->port,

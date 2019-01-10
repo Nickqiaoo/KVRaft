@@ -29,11 +29,13 @@ int KVRaftServiceImpl::PHXEcho(const google::protobuf::StringValue &req, google:
 }
 
 int KVRaftServiceImpl::RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp) {
-    return -1;
+    args_.server->RequestVote(req,resp);
+    return 0;
 }
 
 int KVRaftServiceImpl::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp) {
-    return -1;
+    args_.server->AppendEntries(req,resp);
+    return 0;
 }
 
 int KVRaftServiceImpl::Command(const kvraft::KVArgs &req, kvraft::KVReply *resp) {
