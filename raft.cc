@@ -1,5 +1,4 @@
 #include "raft.h"
-#include "kvraft_client_uthread.h"
 
 #include <mutex>
 
@@ -21,6 +20,7 @@ Raft::Raft(int me, int num_of_server)
       scheduler_(64 * 1024, 300),
       next_index_(num_of_server, 1),
       match_index_(num_of_server, 0),
+      client_(&scheduler_),
       thread_(std::bind(&Raft::RunTimer, this)) {
     std::lock_guard<std::mutex> lock(raft_mutex_);
     log_.emplace_back(LogEntry{});
@@ -30,7 +30,7 @@ Raft::~Raft() { thread_.join(); }
 
 void Raft::RunTimer() {
     struct itimerspec timeout;
-    std::srand(std::time(nullptr));
+    std::srand(Timer::GetSteadyClockMS()+getpid());
     timeout.it_interval.tv_sec = 0;
     timeout.it_interval.tv_nsec = 0;
     timeout.it_value.tv_sec = 0;
@@ -44,13 +44,15 @@ void Raft::RunTimer() {
 }
 
 void Raft::ResetTimer() {
+    printf("%s ", __func__);
     struct itimerspec timeout;
-    std::srand(std::time(nullptr));
+    std::srand(Timer::GetSteadyClockMS()+getpid());
     timeout.it_interval.tv_sec = 0;
     timeout.it_interval.tv_nsec = 0;
     timeout.it_value.tv_sec = 0;
     if (state_ != Leader) {
         timeout.it_value.tv_nsec = (std::rand() % 150 + 150) * 1000000;
+        printf("%d\n", timeout.it_value.tv_nsec);
     } else {
         timeout.it_value.tv_nsec = 100000000;
     }
@@ -88,6 +90,7 @@ void Raft::HandleTimeout(UThreadSocket_t *socket) {
                 ResetTimer();
                 SendRequestVotesToAll(req);
             } else {
+                printf("leader handletimeout\n");
                 SendAppendEntriesToAll();
                 ResetTimer();
             }
@@ -96,7 +99,9 @@ void Raft::HandleTimeout(UThreadSocket_t *socket) {
 }
 
 void Raft::RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp) {
+    printf("receive RequestVote\n");
     std::lock_guard<std::mutex> lock(raft_mutex_);
+    printf("reqterm %d,myterm %d\n",req.term(),current_term_);
 
     resp->set_term(current_term_);
     resp->set_votegranted(false);
@@ -113,6 +118,7 @@ void Raft::RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteRe
                 (log_[log_.size() - 1].term == req.lastlogterm() &&
                  log_.size() - 1 <= req.lastlogindex())) {
                 state_ = Follower;
+                printf("become follower\n");
                 current_term_ = req.term();
                 voted_for_ = req.candidateid();
                 resp->set_term(current_term_);
@@ -124,14 +130,13 @@ void Raft::RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteRe
 }
 
 void Raft::SendRequestVotesToAll(const kvraft::RequestVoteArgs &req) {
-    KVRaftClientUThread client(&scheduler_);
-
+    printf("%s\n", __func__);
     for (int i = 0; i < num_of_server_; i++) {
         if (i != me_) {
             scheduler_.AddTask(
-                [&client, this, req, i](void *) {
+                [this, req, i](void *) {
                     kvraft::RequestVoteReply resp;
-                    int ret = client.RequestVote(req, &resp, i);
+                    int ret = client_.RequestVote(req, &resp, i);
                     if (ret != -1) {
                         HandleRequestVote(resp);
                     }
@@ -142,10 +147,12 @@ void Raft::SendRequestVotesToAll(const kvraft::RequestVoteArgs &req) {
 }
 
 void Raft::HandleRequestVote(const kvraft::RequestVoteReply &resp) {
+    printf("%s\n", __func__);
     std::lock_guard<std::mutex> lock(raft_mutex_);
     if (resp.term() > current_term_) {
         current_term_ = resp.term();
         state_ = Follower;
+        printf("%d become follower\n", me_);
         voted_for_ = -1;
         ResetTimer();
         return;
@@ -169,6 +176,7 @@ void Raft::HandleRequestVote(const kvraft::RequestVoteReply &resp) {
 
 void Raft::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp) {
     std::lock_guard<std::mutex> lock(raft_mutex_);
+    printf("receive AppendEntires\n");
     if (req.term() < current_term_) {
         resp->set_success(false);
         resp->set_term(current_term_);
@@ -218,8 +226,7 @@ void Raft::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEnt
 }
 
 void Raft::SendAppendEntriesToAll() {
-    KVRaftClientUThread client(&scheduler_);
-
+    printf("%s\n", __func__);
     for (int i = 0; i < num_of_server_; i++) {
         if (i != me_) {
             kvraft::AppendEntriesArgs req;
@@ -242,9 +249,10 @@ void Raft::SendAppendEntriesToAll() {
             req.set_leadercommit(commit_index_);
 
             scheduler_.AddTask(
-                [&client, this, req, i](void *) {
+                [this, req, i](void *) {
                     kvraft::AppendEntriesReply resp;
-                    int ret = client.AppendEntries(req, &resp, i);
+                    printf("send AppendEntries to %d\n",i);
+                    int ret = client_.AppendEntries(req, &resp, i);
                     if (ret != -1) {
                         HandleAppendEntries(i, resp);
                     }
@@ -255,6 +263,7 @@ void Raft::SendAppendEntriesToAll() {
 }
 
 void Raft::HandleAppendEntries(int server, const kvraft::AppendEntriesReply &resp) {
+    printf("%s\n", __func__);
     std::lock_guard<std::mutex> lock(raft_mutex_);
     if (state_ != Leader) {
         return;
@@ -296,7 +305,6 @@ bool Raft::Start(const raftkv::LogEntry::operation &op, const string &key, const
 }
 
 void Raft::CommitLog() {
-    std::lock_guard<std::mutex> lock(raft_mutex_);
     if (commit_index_ > log_.size() - 1) {
         commit_index_ = log_.size() - 1;
     }

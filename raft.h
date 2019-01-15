@@ -2,6 +2,7 @@
 
 #include "kvraft.pb.h"
 #include "phxrpc/network.h"
+#include "kvraft_client_uthread.h"
 
 #include <mutex>
 #include <string>
@@ -62,6 +63,8 @@ class Raft {
     int timer_fd_;
     std::thread thread_;
     UThreadEpollScheduler scheduler_;
+    KVRaftClientUThread client_;
+
 };
 
 }  // namespace raftkv

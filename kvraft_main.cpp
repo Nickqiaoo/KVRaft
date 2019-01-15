@@ -93,6 +93,7 @@ int main(int argc, char **argv) {
 
     ServiceArgs_t service_args;
     service_args.config = &config;
+    KVRaftClientUThread::Init("kvraft_client.conf");
     
     phxrpc::HshaServer server(config.GetHshaServerConfig(), Dispatch, &service_args);
     raftkv::KvServer kv_server(id, num_of_server);
