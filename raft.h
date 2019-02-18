@@ -39,7 +39,7 @@ class Raft {
     void HandleAppendEntries(int server, const kvraft::AppendEntriesReply &resp);
     void HandleRequestVote(const kvraft::RequestVoteReply &resp);
     void CommitLog();
-    bool Start(const raftkv::LogEntry::operation &op ,const string &key ,const string &value);
+    std::pair<int,bool> Start(const raftkv::LogEntry::operation &op ,const string &key ,const string &value);
     void HandleTimeout(UThreadSocket_t *socket);
     void ResetTimer();
     void RunTimer();

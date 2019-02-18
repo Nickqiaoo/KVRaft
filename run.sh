@@ -1,0 +1,1 @@
+./kvraft_main -c kvraft_server.conf -i 0 -s 3

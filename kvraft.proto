@@ -22,7 +22,7 @@ enum KVResult{
 
 message KVArgs{
     Operation command = 1;
-    int32 cliendid = 2;
+    int32 clientid = 2;
     int32 seq = 3;
 }
 

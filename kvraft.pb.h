@@ -297,11 +297,11 @@ class KVArgs : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::kvraft::Operation* release_command();
   void set_allocated_command(::kvraft::Operation* command);
 
-  // optional int32 cliendid = 2;
-  void clear_cliendid();
-  static const int kCliendidFieldNumber = 2;
-  ::google::protobuf::int32 cliendid() const;
-  void set_cliendid(::google::protobuf::int32 value);
+  // optional int32 clientid = 2;
+  void clear_clientid();
+  static const int kClientidFieldNumber = 2;
+  ::google::protobuf::int32 clientid() const;
+  void set_clientid(::google::protobuf::int32 value);
 
   // optional int32 seq = 3;
   void clear_seq();
@@ -315,7 +315,7 @@ class KVArgs : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::kvraft::Operation* command_;
-  ::google::protobuf::int32 cliendid_;
+  ::google::protobuf::int32 clientid_;
   ::google::protobuf::int32 seq_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_kvraft_2eproto();
@@ -1074,18 +1074,18 @@ inline void KVArgs::set_allocated_command(::kvraft::Operation* command) {
   // @@protoc_insertion_point(field_set_allocated:kvraft.KVArgs.command)
 }
 
-// optional int32 cliendid = 2;
-inline void KVArgs::clear_cliendid() {
-  cliendid_ = 0;
+// optional int32 clientid = 2;
+inline void KVArgs::clear_clientid() {
+  clientid_ = 0;
 }
-inline ::google::protobuf::int32 KVArgs::cliendid() const {
-  // @@protoc_insertion_point(field_get:kvraft.KVArgs.cliendid)
-  return cliendid_;
+inline ::google::protobuf::int32 KVArgs::clientid() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVArgs.clientid)
+  return clientid_;
 }
-inline void KVArgs::set_cliendid(::google::protobuf::int32 value) {
+inline void KVArgs::set_clientid(::google::protobuf::int32 value) {
   
-  cliendid_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.KVArgs.cliendid)
+  clientid_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.KVArgs.clientid)
 }
 
 // optional int32 seq = 3;

@@ -30,7 +30,7 @@ Raft::~Raft() { thread_.join(); }
 
 void Raft::RunTimer() {
     struct itimerspec timeout;
-    std::srand(Timer::GetSteadyClockMS()+getpid());
+    std::srand(Timer::GetSteadyClockMS() + getpid());
     timeout.it_interval.tv_sec = 0;
     timeout.it_interval.tv_nsec = 0;
     timeout.it_value.tv_sec = 0;
@@ -46,7 +46,7 @@ void Raft::RunTimer() {
 void Raft::ResetTimer() {
     printf("%s ", __func__);
     struct itimerspec timeout;
-    std::srand(Timer::GetSteadyClockMS()+getpid());
+    std::srand(Timer::GetSteadyClockMS() + getpid());
     timeout.it_interval.tv_sec = 0;
     timeout.it_interval.tv_nsec = 0;
     timeout.it_value.tv_sec = 0;
@@ -101,7 +101,7 @@ void Raft::HandleTimeout(UThreadSocket_t *socket) {
 void Raft::RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp) {
     printf("receive RequestVote\n");
     std::lock_guard<std::mutex> lock(raft_mutex_);
-    printf("reqterm %d,myterm %d\n",req.term(),current_term_);
+    printf("reqterm %d,myterm %d\n", req.term(), current_term_);
 
     resp->set_term(current_term_);
     resp->set_votegranted(false);
@@ -251,7 +251,7 @@ void Raft::SendAppendEntriesToAll() {
             scheduler_.AddTask(
                 [this, req, i](void *) {
                     kvraft::AppendEntriesReply resp;
-                    printf("send AppendEntries to %d\n",i);
+                    printf("send AppendEntries to %d\n", i);
                     int ret = client_.AppendEntries(req, &resp, i);
                     if (ret != -1) {
                         HandleAppendEntries(i, resp);
@@ -297,11 +297,12 @@ void Raft::HandleAppendEntries(int server, const kvraft::AppendEntriesReply &res
     }
 }
 
-bool Raft::Start(const raftkv::LogEntry::operation &op, const string &key, const string &value) {
+std::pair<int, bool> Raft::Start(const raftkv::LogEntry::operation &op, const string &key,
+                                 const string &value) {
     std::lock_guard<std::mutex> lock(raft_mutex_);
-    if (state_ != Leader) return false;
+    if (state_ != Leader) std::pair<int, bool>(-1, false);
     log_.emplace_back(LogEntry{op, key, value, current_term_});
-    return true;
+    return std::pair<int, bool>(log_.size() - 1, true);
 }
 
 void Raft::CommitLog() {

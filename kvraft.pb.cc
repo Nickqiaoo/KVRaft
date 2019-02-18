@@ -79,7 +79,7 @@ void protobuf_AssignDesc_kvraft_2eproto() {
   KVArgs_descriptor_ = file->message_type(1);
   static const int KVArgs_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVArgs, command_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVArgs, cliendid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVArgs, clientid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KVArgs, seq_),
   };
   KVArgs_reflection_ =
@@ -263,7 +263,7 @@ void protobuf_AddDesc_kvraft_2eproto() {
     "\030.kvraft.Operation.OpName\022\013\n\003key\030\002 \001(\t\022\r"
     "\n\005value\030\003 \001(\t\"#\n\006OpName\022\007\n\003GET\020\000\022\007\n\003PUT\020"
     "\001\022\007\n\003DEL\020\002\"K\n\006KVArgs\022\"\n\007command\030\001 \001(\0132\021."
-    "kvraft.Operation\022\020\n\010cliendid\030\002 \001(\005\022\013\n\003se"
+    "kvraft.Operation\022\020\n\010clientid\030\002 \001(\005\022\013\n\003se"
     "q\030\003 \001(\005\"7\n\007KVReply\022\035\n\003res\030\001 \001(\0162\020.kvraft"
     ".KVResult\022\r\n\005value\030\002 \001(\t\"<\n\010LogEntry\022\"\n\007"
     "command\030\001 \001(\0132\021.kvraft.Operation\022\014\n\004term"
@@ -792,7 +792,7 @@ void Operation::clear_value() {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int KVArgs::kCommandFieldNumber;
-const int KVArgs::kCliendidFieldNumber;
+const int KVArgs::kClientidFieldNumber;
 const int KVArgs::kSeqFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -819,7 +819,7 @@ void KVArgs::SharedCtor() {
     _is_default_instance_ = false;
   _cached_size_ = 0;
   command_ = NULL;
-  cliendid_ = 0;
+  clientid_ = 0;
   seq_ = 0;
 }
 
@@ -877,7 +877,7 @@ void KVArgs::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(cliendid_, seq_);
+  ZR_(clientid_, seq_);
   if (GetArenaNoVirtual() == NULL && command_ != NULL) delete command_;
   command_ = NULL;
 
@@ -904,17 +904,17 @@ bool KVArgs::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_cliendid;
+        if (input->ExpectTag(16)) goto parse_clientid;
         break;
       }
 
-      // optional int32 cliendid = 2;
+      // optional int32 clientid = 2;
       case 2: {
         if (tag == 16) {
-         parse_cliendid:
+         parse_clientid:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &cliendid_)));
+                 input, &clientid_)));
 
         } else {
           goto handle_unusual;
@@ -968,9 +968,9 @@ void KVArgs::SerializeWithCachedSizes(
       1, *this->command_, output);
   }
 
-  // optional int32 cliendid = 2;
-  if (this->cliendid() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->cliendid(), output);
+  // optional int32 clientid = 2;
+  if (this->clientid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->clientid(), output);
   }
 
   // optional int32 seq = 3;
@@ -991,9 +991,9 @@ void KVArgs::SerializeWithCachedSizes(
         1, *this->command_, false, target);
   }
 
-  // optional int32 cliendid = 2;
-  if (this->cliendid() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->cliendid(), target);
+  // optional int32 clientid = 2;
+  if (this->clientid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->clientid(), target);
   }
 
   // optional int32 seq = 3;
@@ -1016,11 +1016,11 @@ int KVArgs::ByteSize() const {
         *this->command_);
   }
 
-  // optional int32 cliendid = 2;
-  if (this->cliendid() != 0) {
+  // optional int32 clientid = 2;
+  if (this->clientid() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->cliendid());
+        this->clientid());
   }
 
   // optional int32 seq = 3;
@@ -1061,8 +1061,8 @@ void KVArgs::MergeFrom(const KVArgs& from) {
   if (from.has_command()) {
     mutable_command()->::kvraft::Operation::MergeFrom(from.command());
   }
-  if (from.cliendid() != 0) {
-    set_cliendid(from.cliendid());
+  if (from.clientid() != 0) {
+    set_clientid(from.clientid());
   }
   if (from.seq() != 0) {
     set_seq(from.seq());
@@ -1094,7 +1094,7 @@ void KVArgs::Swap(KVArgs* other) {
 }
 void KVArgs::InternalSwap(KVArgs* other) {
   std::swap(command_, other->command_);
-  std::swap(cliendid_, other->cliendid_);
+  std::swap(clientid_, other->clientid_);
   std::swap(seq_, other->seq_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -1149,18 +1149,18 @@ void KVArgs::set_allocated_command(::kvraft::Operation* command) {
   // @@protoc_insertion_point(field_set_allocated:kvraft.KVArgs.command)
 }
 
-// optional int32 cliendid = 2;
-void KVArgs::clear_cliendid() {
-  cliendid_ = 0;
+// optional int32 clientid = 2;
+void KVArgs::clear_clientid() {
+  clientid_ = 0;
 }
- ::google::protobuf::int32 KVArgs::cliendid() const {
-  // @@protoc_insertion_point(field_get:kvraft.KVArgs.cliendid)
-  return cliendid_;
+ ::google::protobuf::int32 KVArgs::clientid() const {
+  // @@protoc_insertion_point(field_get:kvraft.KVArgs.clientid)
+  return clientid_;
 }
- void KVArgs::set_cliendid(::google::protobuf::int32 value) {
+ void KVArgs::set_clientid(::google::protobuf::int32 value) {
   
-  cliendid_ = value;
-  // @@protoc_insertion_point(field_set:kvraft.KVArgs.cliendid)
+  clientid_ = value;
+  // @@protoc_insertion_point(field_set:kvraft.KVArgs.clientid)
 }
 
 // optional int32 seq = 3;
