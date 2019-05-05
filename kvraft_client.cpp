@@ -144,7 +144,7 @@ int KVRaftClient::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::Ap
 
 int KVRaftClient::Command(const kvraft::KVArgs &req, kvraft::KVReply *resp)
 {
-    const phxrpc::Endpoint_t *ep{global_kvraftclient_config_.GetRandom()};
+    const phxrpc::Endpoint_t *ep{global_kvraftclient_config_.GetByIndex(0)};
 
     if (ep) {
         phxrpc::BlockTcpStream socket;

@@ -12,16 +12,17 @@ class KvServer {
    public:
     KvServer(int me, int num_of_server);
     ~KvServer();
-    void AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp);
+    void AppendEntries(const kvraft::AppendEntriesArgs& req, kvraft::AppendEntriesReply* resp);
 
-    void RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp);
-    void StartCommand(kvraft::Operation &op);
-    void Command(const kvraft::KVArgs &req, kvraft::KVReply *resp);
+    void RequestVote(const kvraft::RequestVoteArgs& req, kvraft::RequestVoteReply* resp);
+    void PutDelete(const string& key, const string& value);
+    void Command(const kvraft::KVArgs& req, kvraft::KVReply* resp,UThreadEpollScheduler *scheduler);
+    void StartCommand(const kvraft::Operation& operation,kvraft::KVReply *resp,UThreadEpollScheduler* scheduler);
 
    private:
     std::mutex kvserver_mutex_;
     Raft raft_;
-    std::map<int, int> channel_;
+    std::map<int, int> clientseq_;
     Storage* storage_;
 };
 

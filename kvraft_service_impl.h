@@ -7,17 +7,21 @@
 #pragma once
 
 #include "phxrpc/network.h"
-#include "kvserver.h"
+//#include "kvserver.h"
 
 #include "kvraft.pb.h"
 #include "phxrpc_kvraft_service.h"
 
 
 class KVRaftServerConfig;
+namespace raftkv{
+class KvServer;
+}
 
 typedef struct tagServiceArgs {
     KVRaftServerConfig *config;
-    raftkv::KvServer* server;// you can add other arguments here and initiate in main().
+    raftkv::KvServer* server;
+    // you can add other arguments here and initiate in main().
 } ServiceArgs_t;
 
 class KVRaftServiceImpl : public KVRaftService {

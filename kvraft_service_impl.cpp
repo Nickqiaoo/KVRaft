@@ -10,6 +10,7 @@
 
 #include "kvraft_server_config.h"
 #include "kvraft.pb.h"
+#include "kvserver.h"
 
 
 using namespace std;
@@ -30,15 +31,16 @@ int KVRaftServiceImpl::PHXEcho(const google::protobuf::StringValue &req, google:
 
 int KVRaftServiceImpl::RequestVote(const kvraft::RequestVoteArgs &req, kvraft::RequestVoteReply *resp) {
     args_.server->RequestVote(req,resp);
-    return 0;
+    return -1;
 }
 
 int KVRaftServiceImpl::AppendEntries(const kvraft::AppendEntriesArgs &req, kvraft::AppendEntriesReply *resp) {
-    args_.server->AppendEntries(req,resp);
-    return 0;
+	args_.server->AppendEntries(req,resp);
+	return -1;
 }
 
 int KVRaftServiceImpl::Command(const kvraft::KVArgs &req, kvraft::KVReply *resp) {
+	args_.server->Command(req,resp,worker_uthread_scheduler_);
     return -1;
 }
 

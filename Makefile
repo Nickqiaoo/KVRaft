@@ -6,12 +6,13 @@
 
 include /home/qyj/code/phxrpc/phxrpc.mk
 
-LDFLAGS := -L$(PHXRPC_ROOT)/lib -lphxrpc $(LDFLAGS)
+LDFLAGS := -L$(PHXRPC_ROOT)/lib -lphxrpc $(LDFLAGS) -lleveldb
 
 # choose to use boost for network
 #LDFLAGS := $(PLUGIN_BOOST_LDFLAGS) $(LDFLAGS)
 
 SVR_OBJS = kvraft.pb.o \
+		raft.o \
 		kvraft_service_impl.o \
 		phxrpc_kvraft_service.o \
 		phxrpc_kvraft_dispatcher.o \
@@ -19,8 +20,9 @@ SVR_OBJS = kvraft.pb.o \
 		kvraft_main.o \
 		kvraft_client_uthread.o \
 		phxrpc_kvraft_stub.o \
-		raft.o \
-        kvserver.o
+        kvserver.o \
+		snapshot.o \
+		leveldb_storage.o
 
 
 CLI_OBJS = kvraft.pb.o \
@@ -28,11 +30,14 @@ CLI_OBJS = kvraft.pb.o \
 		kvraft_client_uthread.o \
 		phxrpc_kvraft_stub.o
 
-TARGETS = libkvraft_client.a kvraft_main kvraft_tool_main
+TARGETS = libkvraft_client.a kvraft_main kvraft_tool_main kvraft_client
 
 all: $(TARGETS)
 
-kvraft_main: $(SVR_OBJS)
+kvraft_main: $(SVR_OBJS) 
+	$(LINKER) $^ $(LDFLAGS) -o $@
+
+kvraft_client:$(CLI_OBJS) kvclient.o
 	$(LINKER) $^ $(LDFLAGS) -o $@
 
 libkvraft_client.a: $(CLI_OBJS)
@@ -45,6 +50,8 @@ kvraft_tool_main: phxrpc_kvraft_tool.o kvraft_tool_impl.o kvraft_tool_main.o
 
 raft.o: raft.h kvraft_client_uthread.h
 kvserver.o: kvserver.h
+leveldb_storage.o: leveldb_storage.h storage.h
+snapshot.o: snapshot.h leveldb_storage.h storage.h
 
 ########## message ##########
 

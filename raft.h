@@ -1,8 +1,9 @@
 #pragma once
 
 #include "kvraft.pb.h"
-#include "phxrpc/network.h"
 #include "kvraft_client_uthread.h"
+#include "phxrpc/network.h"
+#include "snapshot.h"
 
 #include <mutex>
 #include <string>
@@ -20,6 +21,7 @@ enum NodeState { Follower, Candidate, Leader };
 
 struct LogEntry {
     enum operation { GET, PUT, DEL };
+    int index;
     operation op;
     string key;
     string value;
@@ -39,10 +41,13 @@ class Raft {
     void HandleAppendEntries(int server, const kvraft::AppendEntriesReply &resp);
     void HandleRequestVote(const kvraft::RequestVoteReply &resp);
     void CommitLog();
-    std::pair<int,bool> Start(const raftkv::LogEntry::operation &op ,const string &key ,const string &value);
+    std::pair<int, bool> Start(const raftkv::LogEntry::operation &op, const string &key,
+                               const string &value, const int &evfd);
     void HandleTimeout(UThreadSocket_t *socket);
     void ResetTimer();
     void RunTimer();
+
+    friend class Snapshot;
 
    private:
     std::mutex raft_mutex_;
@@ -64,7 +69,8 @@ class Raft {
     std::thread thread_;
     UThreadEpollScheduler scheduler_;
     KVRaftClientUThread client_;
-
+    std::map<int, int> channel_;
+    Snapshot snapshot_;
 };
 
 }  // namespace raftkv

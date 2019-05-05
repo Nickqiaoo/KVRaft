@@ -8,9 +8,10 @@ message Operation{
         PUT = 1;
         DEL = 2;
     }
-    OpName op = 1;
-    string key = 2;
-    string value = 3;
+    int32 index = 1;
+    OpName op = 2;
+    string key = 3;
+    string value = 4;
 }
 
 enum KVResult{

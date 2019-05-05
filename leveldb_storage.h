@@ -8,12 +8,12 @@ namespace raftkv {
 
 class LevelDB : public Storage {
    public:
-    LevelDB() {
+    LevelDB(string name) {
         options_.create_if_missing = true;
-        leveldb::Status status = leveldb::DB::Open(options_, "/tmp/testdb", &db_);
+        leveldb::Status status = leveldb::DB::Open(options_, name, &db_);
         assert(status.ok());
     }
-    ~LevelDB() { delete db_; }
+   virtual ~LevelDB() override { delete db_; }
 
     virtual bool Get(const string& key, string* value) override;
     virtual void Put(const string& key,const string& value) override;
